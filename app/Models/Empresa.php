@@ -15,6 +15,8 @@ class Empresa extends Model
         'cnpj',
     ];
 
+    protected $table = 'empresa';
+
     public function endereco():HasOne
     {
         return $this->hasOne(Endereco::class);

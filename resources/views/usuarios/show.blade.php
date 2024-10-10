@@ -8,7 +8,9 @@
     <div class="card mt-5 bg-white shadow-sm">
         <div class="card-header bg-light d-flex justify-content-between flex-column flex-sm-row align-items-center">
             <h4 class="fw-bold" style="color:#6f42c1;">Usuários</h4>
-            <button class="btn mt-2 mt-sm-0" style="background-color:#6f42c1; color:#fff">Adicionar Novo Usuário</button>
+            <a href="{{ route('create.users') }}" class="btn mt-2 mt-sm-0"
+                style="background-color:#6f42c1; color:#fff">Adicionar Novo
+                Usuário</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
