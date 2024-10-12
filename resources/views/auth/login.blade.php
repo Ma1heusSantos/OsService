@@ -28,14 +28,17 @@
             <div class="col-md-6 left-side d-flex flex-column justify-content-center">
                 <h2 class="mb-4 text-black">Os Service</h2>
                 <!-- Form -->
-                <form>
+                <form method="post" action="{{ route('autentica.Usuario') }}">
+                    @csrf
                     <div class="mb-3">
                         <label for="email" class="form-label text-black">E-mail</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                        <input type="email" class="form-control" id="email" name="email"
+                            placeholder="Enter your email">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label text-black">Senha</label>
-                        <input type="password" class="form-control" id="password" placeholder="min 8 chars">
+                        <input type="password" class="form-control" name='password' id="password"
+                            placeholder="min 8 chars">
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Login</button>
                 </form>
