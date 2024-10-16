@@ -23,7 +23,7 @@
                 <ul class="navbar-nav">
                     <!-- imagem clientes -->
                     <li class="nav-item mb-1 mx-3">
-                        <a class="nav-link icon-format" href="#telacliente" data-bs-toggle="modal"
+                        <a class="nav-link icon-format" href="{{ route('show.client') }}" data-bs-toggle="modal"
                             title="Clientes"role="button">
                             <img src="{{ asset('/assets/img_cliente.png') }}" alt="Bootstrap" width="48" height="48">
                             Clientes
@@ -76,14 +76,15 @@
                         Empresas
                     </a>
                 </li> --}}
-                    <li class="nav-item" style="padding-top: 0.2rem">
-                        <form action="#" method="POST" class="nav-link icon-format text-white logout"
-                            onclick="logout(this)">
-                            @csrf
-                            <img src="{{ asset('/assets/shutdown-icon.svg') }}" alt="Ícone de Logout">
-                            <p>Sair</p>
-                        </form>
+                    <li class="nav-item mx-3">
+                        <a class="nav-link icon-format" href="{{ route('logout') }}" data-bs-toggle="modal"
+                            title="Serviços" role="button">
+                            <img src="{{ asset('/assets/shutdown-icon.svg') }}" alt="Bootstrap" width="48"
+                                height="48">
+                            Sair
+                        </a>
                     </li>
+
                 </ul>
             </div>
         </div>

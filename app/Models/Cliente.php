@@ -11,13 +11,15 @@ class Cliente extends Model
     use HasFactory;
 
     protected $fillable =[
-        'nome',
+        'name',
         'cpf',
-        'telefone',
-        'razao_social',
         'cnpj',
+        'telefone',
+        'celular',
+        'razao_social',
         'ie',
     ];
+    protected $table = 'cliente';
 
     public function endereco():HasOne
     {

@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" crossorigin="anonymous" defer>
     </script>
@@ -67,11 +68,36 @@
     </div>
 </body>
 
-<script>
+<script defer>
     $(document).ready(function() {
         $('#sidebarCollapse').on('click', function() {
             $('#sidebar').toggleClass('active');
         });
+        // Máscara para dinheiro
+        var $money = $(".money");
+        $money.mask('000.000.000,00', {
+            reverse: true
+        });
+
+        // Máscara para CPF
+        var $cpf = $(".cpf");
+        $cpf.mask('000.000.000-00', {
+            reverse: true
+        });
+
+        // Máscara para CNPJ
+        var $cnpj = $(".cnpj");
+        $cnpj.mask('00.000.000/0000-00', {
+            reverse: true
+        });
+
+        // Máscara para telefone fixo
+        var $tel = $(".tel");
+        $tel.mask('(00) 0000-0000');
+
+        // Máscara para celular
+        var $celular = $(".celular");
+        $celular.mask('(00) 00000-0000');
     });
 </script>
 

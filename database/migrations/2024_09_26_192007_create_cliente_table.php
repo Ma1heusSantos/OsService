@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('cliente', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
+            $table->string('name')->nullable();
             $table->string('cpf')->nullable();
-            $table->string('telefone');
+            $table->string('telefone')->nullable();
+            $table->string('celular')->nullable();
             $table->string('razao_social')->nullable();
             $table->string('cnpj')->nullable();
             $table->string('ie')->nullable();
