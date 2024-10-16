@@ -1,10 +1,18 @@
 <div class="form-group">
-    <form action="" method="post">
+    <form action="{{ $action }}" method="post">
+        @csrf
+
+        <!-- Campo de name -->
+        <div class="mb-3">
+            <label for="name" class="form-label">name</label>
+            <input type="name" class="form-control" id="name" name="name"
+                placeholder="Insira aqui o E-mail do usuário" value="{{ old('name') }}" autofocus>
+        </div>
         <!-- Campo de E-mail -->
         <div class="mb-3">
-            <label for="email" class="form-label">E-mail *</label>
+            <label for="email" class="form-label">E-mail</label>
             <input type="email" class="form-control" id="email" name="email"
-                placeholder="Insira aqui o E-mail do usuário" required value="{{ old('email') }}" autofocus>
+                placeholder="Insira aqui o E-mail do usuário" value="{{ old('email') }}" autofocus>
         </div>
 
         <!-- Campo de Senha -->
@@ -16,8 +24,8 @@
 
         <div class="mb-3">
             <label for="password_confirmation" class="form-label">Confirme sua Senha</label>
-            <input type="password_confirmation" class="form-control" id="password_confirmation"
-                name="password_confirmation" placeholder="Confirme sua senha">
+            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
+                placeholder="Confirme sua senha">
         </div>
 
         <!-- Campo de Função -->

@@ -24,25 +24,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($users as $user) --}}
-                        <tr>
-                            <td>email@example.com</td>
-                            <td>Administrador</td>
-                            <td class="text-center">
-                                <a href="#" class="text-warning">
-                                    <i class="fa-regular fa-pen-to-square fa-xl"></i>
-                                </a>
-                            </td>
-                            <td class="text-center">
-                                <a href="#" class="text-danger">
-                                    <i class="fa-solid fa-trash-can fa-xl"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        {{-- @endforeach --}}
+                        @foreach ($usuarios as $user)
+                            <tr>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->role }}</td>
+                                <td class="text-center">
+                                    <a href="{{ route('update', $user->id) }}" class="text-warning">
+                                        <i class="fa-regular fa-pen-to-square fa-xl"></i>
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#modalExcluir{{ $user->id }}" class="text-danger delete-user">
+                                        <i class="fa-solid fa-trash-can fa-xl"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <x-user.modal-excluir :user="$user" />
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection
