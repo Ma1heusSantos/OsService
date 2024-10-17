@@ -18,7 +18,7 @@
                     <thead class="table-light">
                         <tr>
                             <th scope="col">E-mail</th>
-                            <th scope="col">Função</th>
+                            <th scope="col" class="text-center">Função</th>
                             <th scope="col" class="text-center">Editar</th>
                             <th scope="col" class="text-center">Excluir</th>
                         </tr>
@@ -27,16 +27,16 @@
                         @foreach ($usuarios as $user)
                             <tr>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->role }}</td>
+                                <td class="text-center">{{ $user->role }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('update', $user->id) }}" class="text-warning">
-                                        <i class="fa-regular fa-pen-to-square fa-xl"></i>
+                                    <a href="{{ route('update', $user->id) }}" class="btn btn-sm btn-outline-warning">
+                                        Editar
                                     </a>
                                 </td>
                                 <td class="text-center">
                                     <a href="#" data-bs-toggle="modal"
-                                        data-bs-target="#modalExcluir{{ $user->id }}" class="text-danger delete-user">
-                                        <i class="fa-solid fa-trash-can fa-xl"></i>
+                                        data-bs-target="#modalExcluir{{ $user->id }}"
+                                        class="btn btn-sm btn-outline-danger delete-user"> Excluir
                                     </a>
                                 </td>
                             </tr>

@@ -21,6 +21,7 @@
 
         Route::prefix('client')->group(function(){
             Route::get('show', [clientController::class, 'show'])->name('show.client');
+            Route::get('reveal/{id}', [clientController::class, 'revealClient'])->name('reveal.client');
             Route::post('store', [clientController::class, 'store'])->name('store.client');
             Route::get('create', [clientController::class, 'create'])->name('create.client');
             // Route::get('update/{id}', [usuariosController::class, 'update'])->name('update');
