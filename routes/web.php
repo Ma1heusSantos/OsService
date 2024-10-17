@@ -24,9 +24,9 @@
             Route::get('reveal/{id}', [clientController::class, 'revealClient'])->name('reveal.client');
             Route::post('store', [clientController::class, 'store'])->name('store.client');
             Route::get('create', [clientController::class, 'create'])->name('create.client');
-            // Route::get('update/{id}', [usuariosController::class, 'update'])->name('update');
-            // Route::post('updateUser/{id}', [usuariosController::class, 'updateUser'])->name('update.users');
-            // Route::get('delete/{id}', [usuariosController::class, 'delete'])->name('delete.users');
+            Route::get('updateClient/{id}', [clientController::class, 'update'])->name('update.client');
+            Route::post('saveClient/{id}', [clientController::class, 'saveClient'])->name('saveClient');
+            Route::get('delete/{id}', [clientController::class, 'delete'])->name('delete.client');
         });
 
         Route::get('home', [homeController::class, 'home'])->name('home');

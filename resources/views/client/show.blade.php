@@ -29,8 +29,13 @@
                                     </div>
                                 </div>
                                 <div class="btn-group">
-                                    <a href="#" class="btn btn-sm btn-outline-warning mr-3">Editar</a>
-                                    <a href="#" class="btn btn-sm btn-outline-danger">Excluir</a>
+                                    <a href="{{ route('update.client', $cliente->id) }}"
+                                        class="btn btn-sm btn-outline-warning mr-3">Editar</a>
+                                    <a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#modalExcluir{{ $cliente->id }}"
+                                        class="btn btn-sm btn-outline-danger delete-user"> Excluir
+                                    </a>
+                                    <x-client.modal-excluir :cliente="$cliente" />
                                 </div>
                             </li>
                         </a>

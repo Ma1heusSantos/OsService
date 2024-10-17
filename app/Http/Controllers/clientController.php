@@ -34,8 +34,8 @@ class clientController extends Controller
                 'bairro' => 'required|string|max:255',
                 'complemento' => 'nullable|string|max:255',
                 'cidade' => 'required|string|max:255',
-                'estado' => 'required|string|max:2',
-                'cep' => 'required|string|size:8' 
+                'estado' => 'required|string|max:12',
+                'cep' => 'required|max:9' 
             ])->validate();   
     
             $cliente = Cliente::create([
@@ -45,10 +45,11 @@ class clientController extends Controller
                 'telefone' => $request->telefone, 
                 'celular' => $request->celular, 
                 'razao_social' => $request->razao_social,
-                'ie' => $request->ie
+                'ie' => $request->ie,
+                'empresa_id'=> Auth::user()->empresa_id
             ]);
             Endereco::create([
-                // 'empresa_id'=>,
+                'empresa_id'=>Auth::user()->empresa_id,
                 'rua'=> $request->rua,
                 'numero'=> $request->numero,
                 'bairro'=> $request->bairro,
@@ -64,6 +65,77 @@ class clientController extends Controller
             Log::info($e->getMessage());
             return redirect()->back()->withErrors($e->getMessage())->withInput();
         }
+    }
+
+    public function update($id){
+        $cliente = Cliente::find($id);
+        return view('client.edit',['cliente'=> $cliente]);
+    }
+    public function saveClient(Request $request,$id){
+        $cliente = Cliente::find($id);
+
+        if (!$cliente) {
+            return redirect()->back()->withErrors('Cliente não encontrado.')->withInput();
+        }
+
+        try{
+            Validator::make($request->all(), [
+                'name' => 'string|max:255',
+                'cpf' => 'nullable|unique:cliente', 
+                'cnpj' => 'nullable|unique:cliente', 
+                'telefone' => 'nullable|string', 
+                'celular' => 'nullable|string|', 
+                'razao_social' => 'nullable|string|max:255',
+                'ie' => 'nullable|string|max:20',
+                'rua' => 'string|max:255',
+                'numero' => 'integer',
+                'bairro' => 'string|max:255',
+                'complemento' => 'nullable|string|max:255',
+                'cidade' => 'string|max:255',
+                'estado' => 'string|max:12',
+                'cep' => 'max:9' 
+            ])->validate();
+            
+            $fields = [
+                'name' => !empty($request->name) ? $request->name : $cliente->name,
+                'cpf' => !empty($request->cpf) ? $request->cpf : $cliente->cpf,
+                'cnpj' => $request->cnpj ? $request->cnpj : $cliente->cnpj,
+                'telefone' => $request->telefone ? $request->telefone : $cliente->telefone,
+                'celular' => !empty($request->celular) ? $request->celular : $cliente->celular,
+                'razao_social' => !empty($request->razao_social) ? $request->razao_social : $cliente->razao_social,
+                'ie' => !empty($request->ie) ? $request->ie : $cliente->ie,
+                'rua' => !empty($request->rua) ? $request->rua : $cliente->rua,
+                'numero' => !empty($request->numero) ? $request->numero : $cliente->numero,
+                'bairro' => !empty($request->bairro) ? $request->bairro : $cliente->bairro,
+                'complemento' => !empty($request->complemento) ? $request->complemento : $cliente->complemento,
+                'cidade' => !empty($request->cidade) ? $request->cidade : $cliente->cidade,
+                'estado' => !empty($request->estado) ? $request->estado : $cliente->estado,
+                'cep' => !empty($request->cep) ? $request->cep : $cliente->cep, 
+            ];
+
+            $cliente->update($fields);
+
+            return redirect()->route('reveal.client',$cliente->id)->with('success', 'Usuário criado com sucesso!');
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return redirect()->back()->withErrors($e->getMessage())->withInput();
+        }
+    }
+
+    public function delete($id){
+   
+        try{
+            $cliente = Cliente::find($id);
+            if (!$cliente) {
+                return redirect()->back()->withErrors('Cliente não encontrado.')->withInput();
+            }else{
+                $cliente->delete();
+            }
+            return redirect()->route('show.client');
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+        }
+        
     }
 
     public function revealClient($id){
