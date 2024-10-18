@@ -139,7 +139,7 @@ class clientController extends Controller
     }
 
     public function revealClient($id){
-        $cliente = Cliente::find($id);
+       $cliente = Cliente::with('endereco')->find($id);
         return view('client.revealClient',['cliente'=>$cliente]);
     }
 }

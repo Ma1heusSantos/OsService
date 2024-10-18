@@ -8,31 +8,55 @@
     <div class="card mt-5 bg-white shadow-sm">
         <div class="card-header bg-light d-flex justify-content-between flex-column flex-sm-row align-items-center">
             <h4 class="fw-bold" style="color:#6f42c1;">Detalhes do Cliente</h4>
-            {{-- <a href="{{ route('clients.index') }}" class="btn mt-2 mt-sm-0" style="background-color:#6f42c1; color:#fff">Voltar
-                à Lista de Clientes</a> --}}
         </div>
         <div class="card-body">
-            <div class="row">
+            <div class="row mb-4">
                 <div class="col-md-6">
-                    <h5 class="mb-3" style="color:#6f42c1; font-weight: 600;">{{ $cliente->name }}</h5>
-                    <p><strong>Telefone:</strong> {{ $cliente->telefone ?? 'não informado' }}</p>
-                    <p><strong>Celular:</strong> {{ $cliente->celular ?? 'não informado' }}</p>
-                    <p><strong>E-mail:</strong> {{ $cliente->email ?? 'não informado' }}</p>
-                    {{-- <p><strong>Endereço:</strong> {{ $cliente->endereco ?? 'N/A' }}</p> --}}
+                    <h5 class="fw-bold" style="color:#6f42c1;">{{ $cliente->name }}</h5>
+                    <p><i class="bi bi-telephone"></i> <strong>Telefone:</strong>
+                        {{ $cliente->telefone ?? 'não informado' }}</p>
+                    <p><i class="bi bi-phone"></i> <strong>Celular:</strong> {{ $cliente->celular ?? 'não informado' }}
+                    </p>
+                    <p><i class="bi bi-envelope"></i> <strong>E-mail:</strong> {{ $cliente->email ?? 'não informado' }}
+                    </p>
                 </div>
                 <div class="col-md-6">
-                    <p><strong>Razão Social:</strong> {{ $cliente->razao_social ?? 'não informado' }}</p>
-                    <p><strong>CPF/CNPJ:</strong> {{ $cliente->cpf_cnpj ?? 'não informado' }}</p>
-                    <p><strong>Inscrição Estadual (IE):</strong> {{ $cliente->ie ?? 'não informado' }}</p>
+                    <p><i class="bi bi-building"></i> <strong>Razão Social:</strong>
+                        {{ $cliente->razao_social ?? 'não informado' }}</p>
+                    <p><i class="bi bi-card-list"></i> <strong>CPF/CNPJ:</strong>
+                        {{ $cliente->cpf_cnpj ?? 'não informado' }}</p>
+                    <p><i class="bi bi-file-earmark-text"></i> <strong>Inscrição Estadual (IE):</strong>
+                        {{ $cliente->ie ?? 'não informado' }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6 class="fw-bold" style="color:#6f42c1;">Endereço:</h6>
+                    <p><i class="bi bi-geo-alt"></i> <strong>Rua:</strong>
+                        {{ $cliente->endereco->rua ?? 'não informado' }}</p>
+                    <p><i class="bi bi-hash"></i> <strong>Número:</strong>
+                        {{ $cliente->endereco->numero ?? 'não informado' }}</p>
+                    <p><i class="bi bi-signpost-split"></i> <strong>Bairro:</strong>
+                        {{ $cliente->endereco->bairro ?? 'não informado' }}</p>
+                    <p><i class="bi bi-building"></i> <strong>Complemento:</strong>
+                        {{ $cliente->endereco->complemento ?? 'não informado' }}</p>
+                    <p><i class="bi bi-geo"></i> <strong>Cidade:</strong>
+                        {{ $cliente->endereco->cidade ?? 'não informado' }}</p>
+                    <p><i class="bi bi-map"></i> <strong>Estado:</strong>
+                        {{ $cliente->endereco->estado ?? 'não informado' }}</p>
+                    <p><i class="bi bi-mailbox"></i> <strong>CEP:</strong>
+                        {{ $cliente->endereco->cep ?? 'não informado' }}</p>
                 </div>
             </div>
             <div class="d-flex justify-content-end mt-4">
-                <a href="#" class="btn btn-outline-warning me-2">Editar</a>
-                <não informado" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este cliente?')">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-outline-danger">Excluir</button>
-                    </form>
+                <div class="btn-group">
+                    <a href="{{ route('update.client', $cliente->id) }}"
+                        class="btn btn-sm btn-outline-warning mr-3">Editar</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalExcluir{{ $cliente->id }}"
+                        class="btn btn-sm btn-outline-danger delete-user"> Excluir
+                    </a>
+                    <x-client.modal-excluir :cliente="$cliente" />
+                </div>
             </div>
         </div>
     </div>
