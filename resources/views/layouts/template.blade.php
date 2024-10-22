@@ -66,6 +66,7 @@
             @yield('conteudo')
         </div>
     </div>
+    @livewireScripts
 </body>
 
 <script defer>
