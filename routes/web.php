@@ -5,6 +5,7 @@
     use App\Http\Controllers\AuthController;
     use App\Http\Middleware\Authorization;
     use App\Http\Controllers\clientController;
+    use App\Http\Controllers\pecaController;
 
     Route::get('/', [AuthController::class, 'auth'])->name('login')->withoutMiddleware(Authorization::class);
     Route::post('autenticaUsuario', [AuthController::class, 'autenticaUsuario'])->name('autentica.Usuario');
@@ -27,6 +28,15 @@
             Route::get('updateClient/{id}', [clientController::class, 'update'])->name('update.client');
             Route::post('saveClient/{id}', [clientController::class, 'saveClient'])->name('saveClient');
             Route::get('delete/{id}', [clientController::class, 'delete'])->name('delete.client');
+        });
+
+        Route::prefix('peca')->group(function(){
+            Route::get('show', [pecaController::class, 'show'])->name('show.peca');
+            Route::post('store', [pecaController::class, 'store'])->name('store.peca');
+            Route::get('create', [pecaController::class, 'create'])->name('create.peca');
+            Route::get('updatePeca/{id}', [pecaController::class, 'update'])->name('update.peca');
+            Route::post('savePeca/{id}', [pecaController::class, 'saveClient'])->name('savePeca');
+            Route::get('delete/{id}', [pecaController::class, 'delete'])->name('delete.peca');
         });
 
         Route::get('home', [homeController::class, 'home'])->name('home');

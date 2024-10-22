@@ -29,7 +29,7 @@
             @endforeach
         </ul>
     @else
-        <p class="text-center">Não há nenhum usuário cadastrado.</p>
+        <p class="text-center">Não há nenhum cliente cadastrado.</p>
     @endif
     @livewireScripts
 </div>

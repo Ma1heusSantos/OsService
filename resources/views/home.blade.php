@@ -32,7 +32,7 @@
                     </li>
                     <!-- imagem produtos -->
                     <li class="nav-item mb-1 mx-3">
-                        <a class="nav-link icon-format" href="#telapecas" data-bs-toggle="modal"
+                        <a class="nav-link icon-format" href="{{ route('show.peca') }}" data-bs-toggle="modal"
                             title="Componetes"role="button">
                             <img src="{{ asset('/assets/img_produtos.png') }}" alt="Bootstrap" width="48"
                                 height="48">
