@@ -35,7 +35,7 @@
             Route::post('store', [pecaController::class, 'store'])->name('store.peca');
             Route::get('create', [pecaController::class, 'create'])->name('create.peca');
             Route::get('updatePeca/{id}', [pecaController::class, 'update'])->name('update.peca');
-            Route::post('savePeca/{id}', [pecaController::class, 'saveClient'])->name('savePeca');
+            Route::post('savePeca/{id}', [pecaController::class, 'savePeca'])->name('savePeca');
             Route::get('delete/{id}', [pecaController::class, 'delete'])->name('delete.peca');
         });
 

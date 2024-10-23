@@ -19,7 +19,7 @@
         <!-- Campo de preço -->
         <div class="mb-3">
             <label for="preco" class="form-label">Preço</label>
-            <input type="number" class="form-control" id="preco" name="preco"
+            <input type="text" class="form-control money" id="preco" name="preco"
                 placeholder="Informe o preço da peça" value="{{ old('preco') }}">
         </div>
 
@@ -41,4 +41,12 @@
             <button type="submit" class="btn btn-success w-100">Salvar</button>
         </div>
     </form>
+    <script>
+        $(document).ready(function($) {
+            var $money = $(".money");
+            $money.mask('000.000.000,00', {
+                reverse: true
+            });
+        });
+    </script>
 </div>

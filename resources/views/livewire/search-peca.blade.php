@@ -11,6 +11,7 @@
                         <th scope="col">Nome</th>
                         <th scope="col">Preço</th>
                         <th scope="col">Categoria</th>
+                        <th scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,6 +21,17 @@
                             <td>{{ $peca->nome }}</td>
                             <td>R$ {{ number_format($peca->preco, 2, ',', '.') }}</td>
                             <td>{{ $peca->categoriaPeca->descricao ?? 'Sem Categoria' }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="{{ route('update.peca', $peca->id) }}"
+                                        class="btn btn-sm btn-outline-warning mr-3">Editar</a>
+                                    <a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#modalExcluir{{ $peca->id }}"
+                                        class="btn btn-sm btn-outline-danger delete-user"> Excluir
+                                    </a>
+                                    <x-peca.modal-excluir :peca="$peca" />
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
