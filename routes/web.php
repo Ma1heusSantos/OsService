@@ -6,6 +6,7 @@
     use App\Http\Middleware\Authorization;
     use App\Http\Controllers\clientController;
     use App\Http\Controllers\pecaController;
+    use App\Http\Controllers\serviceOrderController;
 
     Route::get('/', [AuthController::class, 'auth'])->name('login')->withoutMiddleware(Authorization::class);
     Route::post('autenticaUsuario', [AuthController::class, 'autenticaUsuario'])->name('autentica.Usuario');
@@ -37,6 +38,10 @@
             Route::get('updatePeca/{id}', [pecaController::class, 'update'])->name('update.peca');
             Route::post('savePeca/{id}', [pecaController::class, 'savePeca'])->name('savePeca');
             Route::get('delete/{id}', [pecaController::class, 'delete'])->name('delete.peca');
+        });
+
+        Route::prefix('ServiceOrder')->group(function(){
+            Route::get('show',[serviceOrderController::class,'show'])->name('serviceOrder.show');
         });
 
         Route::get('home', [homeController::class, 'home'])->name('home');

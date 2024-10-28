@@ -42,7 +42,8 @@
                     </li>
                     <!-- imagem os -->
                     <li class="nav-item mb-1 mx-3">
-                        <a class="nav-link icon-format" href="#" data-bs-toggle="modla" title="Ordem de serviço">
+                        <a class="nav-link icon-format" href="{{ route('serviceOrder.show') }}" data-bs-toggle="modla"
+                            title="Ordem de serviço">
                             <img src="{{ asset('/assets/img_os.png') }}" alt="Bootstrap" width="48" height="48">
                             OS
                         </a>
