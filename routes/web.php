@@ -42,6 +42,8 @@
 
         Route::prefix('ServiceOrder')->group(function(){
             Route::get('show',[serviceOrderController::class,'show'])->name('serviceOrder.show');
+            Route::post('store', [serviceOrderController::class, 'store'])->name('store.service');
+            Route::get('create', [serviceOrderController::class, 'create'])->name('create.service');
         });
 
         Route::get('home', [homeController::class, 'home'])->name('home');
