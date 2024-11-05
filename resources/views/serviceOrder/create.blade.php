@@ -19,7 +19,7 @@
             <h4 class="fw-bold" style="color:#6f42c1;">Cadastrar Ordem de Serviço</h4>
         </div>
         <div class="card-body">
-            <x-serviceOrder.form :action="route('store.service')" :categorias="$categorias" :clientes="$clientes" />
+            <livewire:form-service-order :categorias="$categorias" :clientes="$clientes" />
         </div>
     </div>
 @endsection

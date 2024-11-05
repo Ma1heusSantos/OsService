@@ -8,20 +8,53 @@ use App\Models\Peca;
 class BuscarPeca extends Component
 {
     public $query;
+    public $pecas = [];
     public $resultados = [];
 
-    protected $listeners = ['selectPeca'];
 
     public function updatedQuery()
     {
         $this->resultados = Peca::where('nome', 'like', '%' . $this->query . '%')->get();
     }
 
+    public function adicionarPeca()
+    {
+        if (!empty($this->query)) {
+            $peca = Peca::where('nome', 'like', '%' . $this->query . '%')->get()->first();
+            $this->pecas[] = ['id'=>$peca->id,'nome' => $this->query, 'qtd' => 1];
+            $this->query = '';
+            $this->dispatch('atualizarPecas', pecas: $this->pecas);
+        }
+    }
+
+    public function incrementarQtd($index)
+    {
+        if (isset($this->pecas[$index])) {
+            $this->pecas[$index]['qtd']++;
+            $this->dispatch('atualizarPecas', pecas: $this->pecas);
+        }
+    }
+
+
+    public function decrementarQtd($index)
+    {
+        if (isset($this->pecas[$index]) && $this->pecas[$index]['qtd'] > 0) {
+            $this->pecas[$index]['qtd']--;
+            $this->dispatch('atualizarPecas', pecas: $this->pecas);
+        }
+    }
+
     public function selectPeca($nomePeca)
     {
-        $this->query = $nomePeca;  // Atualiza o campo de entrada com o valor selecionado
-        $this->resultados = [];    // Limpa a lista de resultados para ocultar o dropdown
+        $this->query = $nomePeca;  
+        $this->resultados = [];    
     }
+    public function getPecas()
+    {
+        return $this->pecas;
+    }
+   
+
 
     public function render()
     {

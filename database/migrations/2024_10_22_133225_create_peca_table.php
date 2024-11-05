@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string("cod_peca");
             $table->string('nome');
             $table->float('preco');
+            $table->integer('quantidade');
             $table->unsignedBigInteger('empresa_id');
             $table->unsignedBigInteger('categoria_id');
             $table->timestamps();

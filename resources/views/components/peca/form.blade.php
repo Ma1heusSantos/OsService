@@ -13,7 +13,13 @@
         <div class="mb-3">
             <label for="nome" class="form-label">Nome</label>
             <input type="text" class="form-control" id="nome" name="nome"
-                placeholder="Insira aqui o nome da peça" value="{{ old('nome') }}" autofocus>
+                placeholder="Insira aqui o nome da peça" value="{{ old('nome') }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="quantidade" class="form-label">Quantidade de peças</label>
+            <input type="number" class="form-control" id="quantidade" name="quantidade"
+                placeholder="Insira aqui a quantidade de peças" value="{{ old('quantidade') }}">
         </div>
 
         <!-- Campo de preço -->
@@ -26,7 +32,7 @@
         <!-- Campo de Categoria da peça -->
         <div class="mb-3">
             <label for="categoria" class="form-label">Categoria da peça</label>
-            <select class="form-select" id="categoria" name="categoria_id" autofocus>
+            <select class="form-select" id="categoria" name="categoria_id">
                 <option value="" disabled selected>Selecione a categoria</option>
                 @foreach ($categorias as $categoria)
                     <option value={{ $categoria->id }} {{ old('categoria_id') == $categoria->id ? 'selected' : '' }}>

@@ -36,7 +36,8 @@ class pecaController extends Controller
          $peca = Peca::create([
              'cod_peca' => $request->cod_peca,
              'nome' => $request->nome, 
-             'preco' => $preco, 
+             'preco' => $preco,
+             'quantidade'=>$request->quantidade, 
              'categoria_id'=> (int)$request->categoria_id,
              'empresa_id'=> Auth::user()->empresa_id
          ]);
@@ -89,6 +90,7 @@ public function savePeca(Request $request,$id){
             'cod_peca' => !empty($request->cod_peca) ? $request->cod_peca : $peca->cod_peca,    
             'nome' => !empty($request->nome) ? $request->nome : $peca->nome,
             'preco' => $request->preco ? $preco: $peca->preco,
+            'quantidade'=>$request->quantidade ? $request->quantidade:$peca->quantidade, 
             'categoria' => $request->categoria ? (int)$request->categoria : $peca->categoria
             
         ];

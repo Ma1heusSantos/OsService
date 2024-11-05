@@ -16,6 +16,7 @@ class Peca extends Model
         'cod_peca',
         'nome',
         'preco',
+        'quantidade',
         'categoria_id',
         'empresa_id'
     ];
