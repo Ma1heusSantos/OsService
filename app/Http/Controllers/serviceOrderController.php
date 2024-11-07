@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class serviceOrderController extends Controller
 {
     public function show(){
-        $serviceOrder = ServiceOrder::all();
+        $serviceOrder = ServiceOrder::with('categoriaServico', 'cliente')->get();
         return view('serviceOrder.show',['serviceOrder'=>$serviceOrder]);
     }
 
@@ -18,9 +18,5 @@ class serviceOrderController extends Controller
         $categorias = CategoriaServico::all();
         $clientes = Cliente::all();
         return view('serviceOrder.create',['categorias'=>$categorias,'clientes'=>$clientes]);
-    }
-
-    public function store(Request $request){
-        dd($request);
     }
 }

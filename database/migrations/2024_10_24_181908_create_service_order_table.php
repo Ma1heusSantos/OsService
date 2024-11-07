@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('service_order', function (Blueprint $table) {
             $table->id();
-            $table->string('cod_service');
             $table->string('descricao');
             $table->float('preco');
             $table->enum('status',['Concluido','Em andamento','Cancelado']);

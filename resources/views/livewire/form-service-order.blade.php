@@ -1,51 +1,24 @@
 <div class="form-group">
-    <form wire:submit.prevent="submitForm">
+    <form wire:submit="submitForm">
         @csrf
-        <!-- Campo de código da peça -->
-        <div class="mb-3">
-            <label for="cod_service" class="form-label">Código da ordem de serviço:</label>
-            <input type="text" class="form-control" id="cod_service" name="cod_service"
-                placeholder="Insira aqui o código da ordem de serviço" value="{{ old('cod_service') }}" autofocus>
-        </div>
-
         <!-- Campo de nome -->
         <div class="mb-3">
             <label for="nome" class="form-label">Descrição:</label>
-            <textarea type="text" class="form-control" id="descricao" name="descricao"
-                placeholder="Insira aqui a descrição do serviço" value="{{ old('descricao') }}"></textarea>
+            <textarea type="text" class="form-control" id="descricao" wire:model="descricao"
+                placeholder="Insira aqui a descrição do serviço"></textarea>
         </div>
 
         <!-- Campo de preço -->
         <div class="mb-3">
             <label for="preco" class="form-label">Preço:</label>
-            <input type="text" class="form-control money" id="preco" name="preco"
-                placeholder="Informe o preço do serviço" value="{{ old('preco') }}">
+            <input type="text" class="form-control money" id="preco" wire:model="preco"
+                placeholder="Informe o preço do serviço">
         </div>
+
 
         <!-- Campo de Categoria da peça -->
-        <div class="mb-3">
-            <label for="categoria" class="form-label">Categoria do serviço:</label>
-            <select class="form-select" id="categoria" name="categoria_id">
-                <option value="" disabled selected>Selecione a categoria do serviço</option>
-                @foreach ($categorias as $categoria)
-                    <option value={{ $categoria->id }} {{ old('categoria_id') == $categoria->id ? 'selected' : '' }}>
-                        {{ $categoria->descricao }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="cliente" class="form-label">Cliente:</label>
-            <select class="form-select" id="cliente" name="cliente_id">
-                <option value="" disabled selected>Selecione um cliente</option>
-                @foreach ($clientes as $cliente)
-                    <option value={{ $cliente->id }} {{ old('cliente_id') == $cliente->id ? 'selected' : '' }}>
-                        {{ $cliente->name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
+        <livewire:select-categoria :categorias="$categorias" />
+        <livewire:select-cliente />
 
         <!-- Componente que mostra a quantidade de peças -->
         <livewire:buscar-peca id="buscarPecaComponent" />

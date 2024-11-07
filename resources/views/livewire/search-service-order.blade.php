@@ -6,24 +6,32 @@
             <table class="table table-hover align-middle bg-white shadow-sm rounded">
                 <thead class="table-light">
                     <tr class="text-center">
-                        <th scope="col" style="width: 10%;">Código da ordem</th>
                         <th scope="col">Descrição</th>
                         <th scope="col">Preço</th>
                         <th scope="col">Status</th>
                         <th scope="col">Responsavel</th>
                         <th scope="col">Categoria</th>
                         <th scope="col">Cliente</th>
+                        <th scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($serviceOrder as $service)
                         <tr class="text-center">
-                            <td class="fw-bold" style="color:#6f42c1;">{{ $service->cod_service }}</td>
                             <td>{{ $service->descricao }}</td>
                             <td>R$ {{ money($service->preco) }}</td>
-                            <td>R$ {{ $service->status }}</td>
-                            <td>{{ $service->categoriaService->descricao ?? 'Sem Categoria' }}</td>
-                            <td>R$ {{ money($service->cliente->name ?? 'cliente não informado') }}</td>
+                            @if (isset($service->status) && $service->status == 'Concluido')
+                                <td class="text-success">{{ $service->status }}</td>
+                            @elseif (isset($service->status) && $service->status == 'Em andamento')
+                                <td class="text-warning">{{ $service->status }}</td>
+                            @elseif (isset($service->status) && $service->status == 'Cancelado')
+                                <td class="text-danger">{{ $service->status }}</td>
+                            @else
+                                <td class="text-secondary">{{ $service->status }}</td>
+                            @endif
+                            <td>eu</td>
+                            <td>{{ $service->categoriaServico->descricao ?? 'Sem Categoria' }}</td>
+                            <td>{{ $service->cliente->name ?? 'cliente não informado' }}</td>
                             <td>
                                 <div class="btn-group">
                                     <a href="{{ route('update.peca', $service->id) }}"
@@ -32,7 +40,7 @@
                                         data-bs-target="#modalExcluir{{ $service->id }}"
                                         class="btn btn-sm btn-outline-danger delete-user"> Excluir
                                     </a>
-                                    <x-peca.modal-excluir :service="$service" />
+                                    <x-serviceOrder.modal-excluir :service="$service" />
                                 </div>
                             </td>
                         </tr>

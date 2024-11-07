@@ -24,4 +24,8 @@ class Peca extends Model
     public function categoriaPeca():BelongsTo{
         return $this->belongsTo(CategoriaPeca::class, 'categoria_id');
     }
+    public function serviceOrders()
+    {
+        return $this->belongsToMany(ServiceOrder::class,'service_order_pecas')->withPivot('quantidade')->withTimestamps();;
+    }
 }

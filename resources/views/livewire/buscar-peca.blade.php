@@ -1,7 +1,8 @@
 <div style="position: relative;">
     <div>
+        <label for="peca">Peças</label>
         <div class="d-flex">
-            <input type="text" class="form-control" wire:model.live="query"
+            <input type="text" id="peca" class="form-control" wire:model.live="query"
                 placeholder="Digite o nome da peça para buscar" autocomplete="off">
             <button type="button" class="btn col-4" wire:click="adicionarPeca"
                 style="background-color:#6f42c1;color:#fff">
@@ -29,7 +30,8 @@
                 <span class="me-3">{{ $peca['nome'] }}</span>
                 <button type="button" class="btn btn-sm btn-secondary me-2"
                     wire:click="incrementarQtd({{ $index }})">+</button>
-                <input type="text" class="text-center" style="width: 2.0rem" value="{{ $peca['qtd'] }}" readonly>
+                <input type="text" class="text-center" style="width: 2.0rem" value="{{ $peca['quantidade'] }}"
+                    readonly>
                 <button type="button" class="btn btn-sm btn-secondary ms-2"
                     wire:click="decrementarQtd({{ $index }})">-</button>
             </div>

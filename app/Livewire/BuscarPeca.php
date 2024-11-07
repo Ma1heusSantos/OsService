@@ -21,7 +21,7 @@ class BuscarPeca extends Component
     {
         if (!empty($this->query)) {
             $peca = Peca::where('nome', 'like', '%' . $this->query . '%')->get()->first();
-            $this->pecas[] = ['id'=>$peca->id,'nome' => $this->query, 'qtd' => 1];
+            $this->pecas[] = ['id'=>$peca->id,'nome' => $this->query, 'quantidade' => 1];
             $this->query = '';
             $this->dispatch('atualizarPecas', pecas: $this->pecas);
         }
@@ -30,7 +30,7 @@ class BuscarPeca extends Component
     public function incrementarQtd($index)
     {
         if (isset($this->pecas[$index])) {
-            $this->pecas[$index]['qtd']++;
+            $this->pecas[$index]['quantidade']++;
             $this->dispatch('atualizarPecas', pecas: $this->pecas);
         }
     }
@@ -38,8 +38,8 @@ class BuscarPeca extends Component
 
     public function decrementarQtd($index)
     {
-        if (isset($this->pecas[$index]) && $this->pecas[$index]['qtd'] > 0) {
-            $this->pecas[$index]['qtd']--;
+        if (isset($this->pecas[$index]) && $this->pecas[$index]['quantidade'] > 0) {
+            $this->pecas[$index]['quantidade']--;
             $this->dispatch('atualizarPecas', pecas: $this->pecas);
         }
     }
