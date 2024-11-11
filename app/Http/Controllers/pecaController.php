@@ -97,7 +97,7 @@ public function savePeca(Request $request,$id){
 
         $peca->update($fields);
 
-        return redirect()->route('show.peca',$peca->id)->with('success', 'Usuário criado com sucesso!');
+        return redirect()->route('show.peca',$peca->id)->with('success', 'Peça criada com sucesso!');
     }catch(Exception $e){
         Log::info($e->getMessage());
         return redirect()->back()->withErrors($e->getMessage())->withInput();

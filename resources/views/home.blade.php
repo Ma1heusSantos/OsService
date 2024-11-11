@@ -56,8 +56,8 @@
                     </li>
                     <!-- imagem servicos -->
                     <li class="nav-item mx-3">
-                        <a class="nav-link icon-format" href="#" data-bs-toggle="modal" title="Serviços"
-                            role="button">
+                        <a class="nav-link icon-format" href="{{ route('show.servicos') }}" data-bs-toggle="modal"
+                            title="Serviços" role="button">
                             <img src="{{ asset('/assets/img_cadservico.png') }}" alt="Bootstrap" width="48"
                                 height="48">
                             Serviços
@@ -65,7 +65,7 @@
                     </li>
                     <!-- imagem usuarios -->
                     <li class="nav-item mx-3">
-                        <a class="nav-link icon-format" href="{{ route('show.users') }}" data-toggle="modal"
+                        <a class="nav-link icon-format" href="{{ route('show.servicos') }}" data-toggle="modal"
                             title="Usuários">
                             <img src="{{ asset('/assets/img_user.png') }}" alt="Bootstrap" width="48" height="48">
                             Usuários

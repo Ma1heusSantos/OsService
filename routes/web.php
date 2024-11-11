@@ -7,6 +7,8 @@
     use App\Http\Controllers\clientController;
     use App\Http\Controllers\pecaController;
     use App\Http\Controllers\serviceOrderController;
+use App\Http\Controllers\servicosController;
+use Illuminate\Auth\Middleware\Authenticate;
 
     Route::get('/', [AuthController::class, 'auth'])->name('login')->withoutMiddleware(Authorization::class);
     Route::post('autenticaUsuario', [AuthController::class, 'autenticaUsuario'])->name('autentica.Usuario');
@@ -44,8 +46,19 @@
             Route::get('show',[serviceOrderController::class,'show'])->name('serviceOrder.show');
             Route::post('store', [serviceOrderController::class, 'store'])->name('store.service');
             Route::get('create', [serviceOrderController::class, 'create'])->name('create.service');
+            //ainda falta implementar o update e o delete dessas rotas.
         });
 
         Route::get('home', [homeController::class, 'home'])->name('home');
         Route::get('logout',[AuthController::class,'logout'])->name('logout');
+
+
+        Route::prefix('Servicos')->group(function(){
+            Route::get('show',[servicosController::class,'show'])->name('show.servicos');
+            Route::post('store', [servicosController::class, 'store'])->name('store.servicos');
+            Route::get('create', [servicosController::class, 'create'])->name('create.servicos');
+            Route::get('delete/{id}', [servicosController::class, 'delete'])->name('delete.servicos');
+            Route::post('saveServico/{id}', [servicosController::class, 'saveServico'])->name('save.servicos');
+            Route::get('update/{id}', [servicosController::class, 'update'])->name('update.servicos');
+        });
     });

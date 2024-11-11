@@ -43,4 +43,11 @@ class ServiceOrder extends Model
     {
         return $this->belongsToMany(Peca::class,'service_order_pecas')->withPivot('quantidade')->withTimestamps();;
     }
+    public function servicos()
+{
+    return $this->belongsToMany(Servicos::class, 'service_order_servicos')
+                ->withPivot('quantidade', 'preco')
+                ->withTimestamps();
+}
+
 }

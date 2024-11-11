@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('servicos', function (Blueprint $table) {
             $table->id();
+            $table->string('codigo')->nullable();
+            $table->string('descricao');
+            $table->decimal('valor', 8, 2)->nullable();
             $table->timestamps();
         });
     }
