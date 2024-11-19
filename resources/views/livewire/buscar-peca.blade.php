@@ -1,6 +1,6 @@
 <div style="position: relative;">
     <div>
-        <label for="peca">Peças</label>
+        <label for="peca" class='mt-3'>Peças</label>
         <div class="d-flex">
             <input type="text" id="peca" class="form-control" wire:model.live="query"
                 placeholder="Digite o nome da peça para buscar" autocomplete="off">
@@ -21,20 +21,21 @@
             </ul>
         @endif
     </div>
-
-    <!-- Div para mostrar todas as peças adicionadas -->
-    <div class="mt-4">
-        <h5>Peças Adicionadas:</h5>
-        @foreach ($pecas as $index => $peca)
-            <div class="d-flex align-items-center mb-2">
-                <span class="me-3">{{ $peca['nome'] }}</span>
-                <button type="button" class="btn btn-sm btn-secondary me-2"
-                    wire:click="incrementarQtd({{ $index }})">+</button>
-                <input type="text" class="text-center" style="width: 2.0rem" value="{{ $peca['quantidade'] }}"
-                    readonly>
-                <button type="button" class="btn btn-sm btn-secondary ms-2"
-                    wire:click="decrementarQtd({{ $index }})">-</button>
-            </div>
-        @endforeach
-    </div>
+    @if (!empty($servicos))
+        <!-- Div para mostrar todas as peças adicionadas -->
+        <div class="mt-4">
+            <h5>Peças Adicionadas:</h5>
+            @foreach ($pecas as $index => $peca)
+                <div class="d-flex align-items-center mb-2">
+                    <span class="me-3">{{ $peca['nome'] }}</span>
+                    <button type="button" class="btn btn-sm btn-secondary me-2"
+                        wire:click="incrementarQtd({{ $index }})">+</button>
+                    <input type="text" class="text-center" style="width: 2.0rem" value="{{ $peca['quantidade'] }}"
+                        readonly>
+                    <button type="button" class="btn btn-sm btn-secondary ms-2"
+                        wire:click="decrementarQtd({{ $index }})">-</button>
+                </div>
+            @endforeach
+        </div>
+    @endif
 </div>

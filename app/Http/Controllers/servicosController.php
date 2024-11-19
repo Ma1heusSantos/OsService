@@ -71,7 +71,7 @@ class servicosController extends Controller
         try{
             Validator::make($request->all(), [
                 'codigo' => 'unique:servicos,codigo|max:255',
-                'descricao' => 'required|string|max:255', 
+                'descricao' => 'string|max:255', 
                 'valor' => 'required', 
                 
             ])->validate();

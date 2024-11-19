@@ -21,15 +21,15 @@ class FormServiceOrder extends Component
     public $descricao;
 
     public $cliente_id;
+    public $servicos = [];
     public $clientes;
     public $pecasSelecionadas = []; 
     protected $rules = [
-        'cod_service' => 'required|string|max:255',
         'descricao' => 'required|string',
         'preco' => 'required',
     ];
 
-    protected $listeners = ['atualizarPecas','atualizarCategoria','atualizarCliente'];
+    protected $listeners = ['atualizarPecas','atualizarCategoria','atualizarCliente','atualizarServico'];
     
     #[On('atualizarPecas')]
     public function atualizarPecas($pecas)
@@ -41,6 +41,12 @@ class FormServiceOrder extends Component
     public function atualizarCategoria($categoria_id)
     {
         $this->categoria_id = $categoria_id;
+    }
+
+    #[On('atualizarServico')]    
+    public function atualizarServico($servico)
+    {
+        $this->servicos = $servico;
     }
 
     #[On('atualizarCliente')]
@@ -69,6 +75,10 @@ class FormServiceOrder extends Component
             foreach ($this->pecasSelecionadas as $peca) {
                 $serviceOrder->pecas()->attach($peca['id'], ['quantidade' => $peca['quantidade'],]);
             }
+            foreach ($this->servicos as $servico) {
+                $serviceOrder->servicos()->attach($servico['id'], ['quantidade' => $servico['quantidade'],'preco' => $servico['valor'],]);
+            }
+            
             session()->flash('message', 'Ordem de serviço criada com sucesso!');
             return redirect()->route('serviceOrder.show');
         

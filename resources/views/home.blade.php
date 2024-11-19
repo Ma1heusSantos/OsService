@@ -71,6 +71,15 @@
                             Usuários
                         </a>
                     </li>
+                    <!-- imagem mecanicos -->
+                    <li class="nav-item mx-3">
+                        <a class="nav-link icon-format" href="{{ route('show.servicos') }}" data-toggle="modal"
+                            title="Usuários">
+                            <img src="{{ asset('/assets/usuario-mecanico.png') }}" alt="Bootstrap" width="48"
+                                height="48">
+                            Mecânicos
+                        </a>
+                    </li>
                     {{-- <li class="nav-item mx-3">
                     <a class="nav-link icon-format" href="#cadempresa" data-bs-toggle="modal" title="Empresa" role="button">
                         <img src="{{ Vite::asset('public/img_empresa.png') }}" alt="Bootstrap" width="48" height="48">

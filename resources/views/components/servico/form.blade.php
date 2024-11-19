@@ -6,20 +6,20 @@
         <div class="mb-3">
             <label for="cod_servico" class="form-label">Código do servico</label>
             <input type="text" class="form-control" id="cod_servico" name="cod_servico"
-                placeholder="Insira aqui o código do servico" value="{{ old('cod_servico') }}" autofocus>
+                placeholder="Insira aqui o código do servico" value="{{ $servico->codigo ?? '' }}">
         </div>
 
         <div class="mb-3">
             <label for="descricao" class="form-label">Descricao</label>
             <input type="text" class="form-control" id="descricao" name="descricao"
-                placeholder="Insira aqui a descricao do servico" value="{{ old('descricao') }}">
+                placeholder="Insira aqui a descricao do servico" value="{{ $servico->descricao ?? '' }}">
         </div>
 
         <!-- Campo de preço -->
         <div class="mb-3">
             <label for="valor" class="form-label">Valor(R$)</label>
             <input type="text" class="form-control money" id="valor" name="valor"
-                placeholder="Informe o valor do serviço" value="{{ old('valor') }}">
+                placeholder="Informe o valor do serviço" value="{{ $servico->valor ?? '' }}">
         </div>
 
         <!-- Botão de Enviar -->

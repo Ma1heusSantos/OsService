@@ -15,10 +15,14 @@
                 placeholder="Informe o preço do serviço">
         </div>
 
-
         <!-- Campo de Categoria da peça -->
         <livewire:select-categoria :categorias="$categorias" />
+
+        <!-- Campo de Seleção de Cliente -->
         <livewire:select-cliente />
+
+        <!-- Campo de Seleção de Serviço -->
+        <livewire:adicionar-servico />
 
         <!-- Componente que mostra a quantidade de peças -->
         <livewire:buscar-peca id="buscarPecaComponent" />
@@ -26,7 +30,7 @@
         <input type="hidden" wire:model="pecas">
 
         <!-- Botão de Enviar -->
-        <div class="mb-3">
+        <div class="mb-3 mt-5">
             <button type="submit" class="btn btn-success w-100">Salvar</button>
         </div>
     </form>
