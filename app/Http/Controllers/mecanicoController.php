@@ -15,50 +15,55 @@ class mecanicoController extends Controller
     public function create(){
         return view('mecanicos.create');
     }
-    public function store(Request $request){
-        try{
-            Validator::make($request->all(), [
-                'nome' => 'required|string|max:255',
-                'cpf' => 'nullable|unique:cliente,cpf|required_without:cnpj', 
-                'telefone' => 'nullable|string|required_without:celular', 
-                'especialidade' => 'nullable|string|max:255',
-                'data_nascimento' => ['required', 'date', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')],
-                'rua' => 'required|string|max:255',
-                'numero' => 'required|integer',
-                'bairro' => 'required|string|max:255',
-                'complemento' => 'nullable|string|max:255',
-                'cidade' => 'required|string|max:255',
-                'estado' => 'required|string|max:12',
-                'cep' => 'required|max:9' 
-            ])->validate();   
-    
-            $mecanico = Mecanico::create([
-                'nome' => $request->nome,
-                'cpf' => $request->cpf, 
-                'especialidade' => $request->especialidade,
-                'status' => true, 
-                'telefone' => $request->telefone,  
-                'data_nascimento' => $request->data_nascimento,
-                'empresa_id'=> Auth::user()->empresa_id
-            ]);
-            $mecanico->endereco()->create([
-                'empresa_id'=>Auth::user()->empresa_id,
-                'rua'=> $request->rua,
-                'numero'=> $request->numero,
-                'bairro'=> $request->bairro,
-                'complemento'=> $request->complemento,
-                'cidade'=> $request->cidade,
-                'estado'=>$request->estado,
-                'cep'=> $request->cep,
-                'cliente_id'=>$mecanico->id
-            ]);
+    public function store(Request $request)
+{
+    // Validação
+    $request->validate([
+        'nome' => 'required|string|max:255',
+        'cpf' => 'nullable|unique:mecanicos,cpf', 
+        'telefone' => 'nullable|string',
+        'especialidade' => 'nullable|string|max:255',
+        'data_nascimento' => ['required', 'date', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')],
+        'rua' => 'required|string|max:255',
+        'numero' => 'required|integer',
+        'bairro' => 'required|string|max:255',
+        'complemento' => 'nullable|string|max:255',
+        'cidade' => 'required|string|max:255',
+        'estado' => 'required|string|max:12',
+        'cep' => 'required|max:9'
+    ]);
 
-            return redirect()->route('show.mecanicos')->with('success', 'Cliente criado com sucesso!');
-        }catch(Exception $e){
-            Log::info($e->getMessage());
-            return redirect()->back()->withErrors($e->getMessage())->withInput();
-        }
+    try {
+    
+        $mecanico = Mecanico::create([
+            'nome' => $request->nome,
+            'cpf' => $request->cpf,
+            'especialidade' => $request->especialidade,
+            'status' => true,
+            'telefone' => $request->telefone,
+            'data_nascimento' => $request->data_nascimento,
+            'empresa_id' => Auth::user()->empresa_id
+        ]);
+
+        $mecanico->endereco()->create([
+            'empresa_id' => Auth::user()->empresa_id,
+            'rua' => $request->rua,
+            'numero' => $request->numero,
+            'bairro' => $request->bairro,
+            'complemento' => $request->complemento,
+            'cidade' => $request->cidade,
+            'estado' => $request->estado,
+            'cep' => $request->cep,
+        ]);
+
+     
+        return redirect()->route('show.mecanicos')->with('success', 'Mecânico criado com sucesso!');
+    } catch (Exception $e) {
+        Log::error('Erro ao criar mecânico: ' . $e->getMessage());
+        return redirect()->back()->withErrors(['error' => 'Erro ao salvar o mecânico. Tente novamente.'])->withInput();
     }
+}
+
     public function update($id){
         $mecanico = Mecanico::with('endereco')->find($id);
         return view('mecanicos.update',['mecanico'=> $mecanico]);
