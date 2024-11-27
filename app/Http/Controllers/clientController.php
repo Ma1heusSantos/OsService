@@ -48,7 +48,7 @@ class clientController extends Controller
                 'ie' => $request->ie,
                 'empresa_id'=> Auth::user()->empresa_id
             ]);
-            Endereco::create([
+            $cliente->endereco()->create([
                 'empresa_id'=>Auth::user()->empresa_id,
                 'rua'=> $request->rua,
                 'numero'=> $request->numero,
@@ -96,7 +96,7 @@ class clientController extends Controller
                 'cep' => 'max:9' 
             ])->validate();
             
-            $fields = [
+            $campos = [
                 'name' => !empty($request->name) ? $request->name : $cliente->name,
                 'cpf' => !empty($request->cpf) ? $request->cpf : $cliente->cpf,
                 'cnpj' => $request->cnpj ? $request->cnpj : $cliente->cnpj,
@@ -104,6 +104,10 @@ class clientController extends Controller
                 'celular' => !empty($request->celular) ? $request->celular : $cliente->celular,
                 'razao_social' => !empty($request->razao_social) ? $request->razao_social : $cliente->razao_social,
                 'ie' => !empty($request->ie) ? $request->ie : $cliente->ie,
+                
+            ];
+
+            $camposEndereco = [
                 'rua' => !empty($request->rua) ? $request->rua : $cliente->rua,
                 'numero' => !empty($request->numero) ? $request->numero : $cliente->numero,
                 'bairro' => !empty($request->bairro) ? $request->bairro : $cliente->bairro,
@@ -113,7 +117,8 @@ class clientController extends Controller
                 'cep' => !empty($request->cep) ? $request->cep : $cliente->cep, 
             ];
 
-            $cliente->update($fields);
+            $cliente->update($campos);
+            $cliente->endereco()->update($camposEndereco);
 
             return redirect()->route('reveal.client',$cliente->id)->with('success', 'Usuário criado com sucesso!');
         }catch(Exception $e){

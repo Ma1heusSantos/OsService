@@ -18,13 +18,23 @@ class AdicionarServico extends Component
     }
     public function adicionarServico()
     {
+        $servico = Servicos::where('descricao', 'like', '%' . $this->query . '%')->first();
         if (!empty($this->query)) {
-            $servico = Servicos::where('descricao', 'like', '%' . $this->query . '%')->get()->first();
-            $this->servicos[] = ['id'=>$servico->id,'descricao' => $this->query,'valor'=>$servico->valor, 'quantidade' => 1];
+            if (!$servico) {
+                session()->flash('error', 'Serviço não encontrado. Adicione um serviço e tente novamente.');
+                return;
+            }
+            $this->servicos[] = [
+                'id' => $servico->id,
+                'descricao' => $servico->descricao,
+                'valor' => $servico->valor,
+                'quantidade' => 1
+            ];
             $this->query = '';
             $this->dispatch('atualizarServico', servico: $this->servicos);
-        }
     }
+}
+
 
     public function removeElemento($index){
         if (isset($this->servicos[$index])) {

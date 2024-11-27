@@ -10,6 +10,12 @@
             </button>
         </div>
 
+        @if (session()->has('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
         @if (!empty($resultados))
             <ul
                 style="position: absolute; background: white; border: 1px solid #ddd; width: 100%; max-height: 150px; overflow-y: auto; z-index: 1000; padding: 0; margin-top: 5px; list-style: none;">
@@ -21,7 +27,7 @@
             </ul>
         @endif
     </div>
-    @if (!empty($servicos))
+    @if (!empty($pecas))
         <!-- Div para mostrar todas as peças adicionadas -->
         <div class="mt-4">
             <h5>Peças Adicionadas:</h5>

@@ -3,7 +3,9 @@
 namespace App\Livewire;
 
 use App\Models\Cliente;
+use Exception;
 use Livewire\Component;
+use Illuminate\Support\Facades\Log;
 
 class SelectCliente extends Component
 {
@@ -16,9 +18,9 @@ class SelectCliente extends Component
         $this->resultados = Cliente::where('name', 'LIKE', '%' . $this->clienteSelecionado . '%')->get();
     }
     
-    public function selectCliente($Cliente)
+    public function selectCliente($cliente)
     {
-        $this->clienteSelecionado = $Cliente;
+        $this->clienteSelecionado = $cliente;
         $this->dispatch('atualizarCliente', cliente_id: $this->clienteSelecionado);  
         $this->resultados = []; 
 

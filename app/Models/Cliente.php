@@ -20,14 +20,16 @@ class Cliente extends Model
         'celular',
         'razao_social',
         'ie',
+        'email',
         'empresa_id'
     ];
     protected $table = 'cliente';
 
-    public function endereco():HasOne
+    public function endereco()
     {
-        return $this->hasOne(Endereco::class);
+        return $this->morphOne(Endereco::class, 'enderecavel');
     }
+
     public function empresa():BelongsTo
     {
         return $this->belongsTo(Empresa::class,'empresa_id');

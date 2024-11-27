@@ -10,27 +10,15 @@ class Endereco extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'empresa_id',
-        'rua',
-        'numero',
-        'bairro',
-        'complemento',
-        'cidade',
-        'estado',
-        'cep',
-        'cliente_id'
-    ];
-
     protected $table = 'endereco';
 
-    public function cliente():BelongsTo
+    protected $fillable = [
+        'rua', 'numero', 'bairro', 'complemento', 'cidade', 'estado', 'cep',
+    ];
+
+    public function enderecavel()
     {
-        return $this->belongsTo(Cliente::class,'cliente_id');
+        return $this->morphTo();
     }
 
-    public function empresa():BelongsTo
-    {
-        return $this->belongsTo(Endereco::class,'empresa_id');
-    }
 }

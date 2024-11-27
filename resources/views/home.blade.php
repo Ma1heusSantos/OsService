@@ -73,7 +73,7 @@
                     </li>
                     <!-- imagem mecanicos -->
                     <li class="nav-item mx-3">
-                        <a class="nav-link icon-format" href="{{ route('show.servicos') }}" data-toggle="modal"
+                        <a class="nav-link icon-format" href="{{ route('show.mecanicos') }}" data-toggle="modal"
                             title="Usuários">
                             <img src="{{ asset('/assets/usuario-mecanico.png') }}" alt="Bootstrap" width="48"
                                 height="48">

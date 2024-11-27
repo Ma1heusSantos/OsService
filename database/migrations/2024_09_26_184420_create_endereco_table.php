@@ -13,18 +13,15 @@ return new class extends Migration
     {
         Schema::create('endereco', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('empresa_id');
+            $table->morphs('enderecavel'); 
             $table->string("rua");
             $table->integer("numero");
             $table->string("bairro");
-            $table->string("complemento")->nullable(); ;
+            $table->string("complemento")->nullable();
             $table->string("cidade");
             $table->string("estado");
             $table->string("cep");
             $table->timestamps();
-
-            $table->foreign('empresa_id')->references('id')->on('empresa')->onDelete('cascade');
-            
         });
     }
 
@@ -33,10 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('endereco', function (Blueprint $table) {
-            $table->dropForeign(['empresa_id']);
-        });
-        Schema::dropIfExists('endereco');
-        
+        Schema::dropIfExists('enderecos');
     }
 };

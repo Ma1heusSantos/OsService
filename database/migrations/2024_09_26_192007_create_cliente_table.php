@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('cpf')->nullable();
             $table->string('telefone')->nullable();
+            $table->string('email')->nullable();
             $table->string('celular')->nullable();
             $table->string('razao_social')->nullable();
             $table->string('cnpj')->nullable();

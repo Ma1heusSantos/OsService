@@ -27,6 +27,21 @@ class FormServiceOrder extends Component
     protected $rules = [
         'descricao' => 'required|string',
         'preco' => 'required',
+        'email' => 'required|unique:users|max:255',
+        'cliente_id' => 'required|string|exists:clientes,name',
+        'categoria_id' => 'required|string|exists:categoria_servicos,descricao',
+    ];
+    
+    protected $messages = [
+        'descricao.required' => 'O campo descrição é obrigatório.',
+        'preco.required' => 'O campo preço é obrigatório.',
+        'email.required' => 'O campo email é obrigatório.',
+        'email.unique' => 'Este email já está em uso.',
+        'email.max' => 'O email não pode exceder 255 caracteres.',
+        'cliente_id.required' => 'O campo cliente é obrigatório.',
+        'cliente_id.exists' => 'O cliente informado não foi encontrado.',
+        'categoria_id.required' => 'O campo categoria é obrigatório.',
+        'categoria_id.exists' => 'A categoria informada não foi encontrada.',
     ];
 
     protected $listeners = ['atualizarPecas','atualizarCategoria','atualizarCliente','atualizarServico'];

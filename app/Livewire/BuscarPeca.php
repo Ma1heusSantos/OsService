@@ -21,6 +21,10 @@ class BuscarPeca extends Component
     {
         if (!empty($this->query)) {
             $peca = Peca::where('nome', 'like', '%' . $this->query . '%')->get()->first();
+            if (!$peca) {
+                session()->flash('error', 'Peça não encontrada. Adicione uma peça e tente novamente.');
+                return;
+            }
             $this->pecas[] = ['id'=>$peca->id,'nome' => $this->query, 'quantidade' => 1];
             $this->query = '';
             $this->dispatch('atualizarPecas', pecas: $this->pecas);

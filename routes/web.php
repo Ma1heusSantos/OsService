@@ -5,7 +5,8 @@
     use App\Http\Controllers\AuthController;
     use App\Http\Middleware\Authorization;
     use App\Http\Controllers\clientController;
-    use App\Http\Controllers\pecaController;
+use App\Http\Controllers\mecanicoController;
+use App\Http\Controllers\pecaController;
     use App\Http\Controllers\serviceOrderController;
 use App\Http\Controllers\servicosController;
 use Illuminate\Auth\Middleware\Authenticate;
@@ -60,5 +61,15 @@ use Illuminate\Auth\Middleware\Authenticate;
             Route::get('delete/{id}', [servicosController::class, 'delete'])->name('delete.servicos');
             Route::post('saveServico/{id}', [servicosController::class, 'saveServico'])->name('save.servicos');
             Route::get('update/{id}', [servicosController::class, 'update'])->name('update.servicos');
+        });
+
+        Route::prefix('mecanicos')->group(function(){
+            Route::get('show',[mecanicoController::class,'show'])->name('show.mecanicos');
+            Route::get('revealMecanico/{id}', [mecanicoController::class, 'revealMecanico'])->name('reveal.mecanico');
+            Route::post('store', [mecanicoController::class, 'store'])->name('store.mecanicos');
+            Route::get('create', [mecanicoController::class, 'create'])->name('create.mecanicos');
+            Route::get('delete/{id}', [mecanicoController::class, 'delete'])->name('delete.mecanicos');
+            Route::post('saveMecanico/{id}', [mecanicoController::class, 'saveMecanico'])->name('save.mecanicos');
+            Route::get('update/{id}', [mecanicoController::class, 'update'])->name('update.mecanicos');
         });
     });
