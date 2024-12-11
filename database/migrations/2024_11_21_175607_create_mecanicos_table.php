@@ -22,6 +22,7 @@
                 $table->unsignedBigInteger('empresa_id')->nullable();
                 $table->foreign('empresa_id')->references('id')->on('empresa')->onDelete('set null');
                 $table->timestamps();
+                $table->softDeletes(); 
             });
         }
 

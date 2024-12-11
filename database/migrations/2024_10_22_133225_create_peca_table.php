@@ -20,8 +20,9 @@ return new class extends Migration
             $table->unsignedBigInteger('empresa_id');
             $table->unsignedBigInteger('categoria_id');
             $table->timestamps();
+            $table->softDeletes(); 
             $table->foreign("empresa_id")->references("id")->on("empresa");
-            $table->foreign("categoria_id")->references("id")->on("categoria_peca");
+            $table->foreign("categoria_id")->references("id")->on("categoria_peca")->onDelete('cascade');
         });
     }
 

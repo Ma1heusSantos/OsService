@@ -23,7 +23,7 @@ class usuariosController extends Controller
     }
 
     public function store(Request $request ){
-        try{
+        
             Validator::make($request->all(), [
                 'name'=> 'required',
                 'email' => 'required|unique:users|max:255',
@@ -31,6 +31,7 @@ class usuariosController extends Controller
                 'password_confirmation' =>'same:password',
                 'role' => 'required'
             ])->validate();
+            try{
     
             User::create([
                 'name'=>$request->name,
@@ -43,7 +44,7 @@ class usuariosController extends Controller
             return redirect()->route('show.users')->with('success', 'Usuário criado com sucesso!');
         }catch(Exception $e){
             Log::info($e->getMessage());
-            return redirect()->back()->withErrors($e->getMessage())->withInput();
+            return redirect()->back()->withErrors(['error' => 'Erro ao salvar o usuario. Tente novamente.'])->withInput();
         }
         
     }
@@ -58,7 +59,6 @@ class usuariosController extends Controller
             return redirect()->back()->withErrors('Usuário não encontrado.')->withInput();
         }
 
-        try{
             Validator::make($request->all(), [
                 'name'=>'nullable|string|max:255',
                 'email' => 'email|unique:users,email,' . $user->id . '|max:255|nullable',
@@ -66,6 +66,7 @@ class usuariosController extends Controller
                 'password_confirmation' => 'same:password|nullable',
                 'role'=>'nullable'
             ])->validate();
+            try{
             
             $fields = [
                 'name' => !empty($request->name) ? $request->name : $user->name,
@@ -80,7 +81,7 @@ class usuariosController extends Controller
             return redirect()->route('show.users')->with('success', 'Usuário criado com sucesso!');
         }catch(Exception $e){
             Log::info($e->getMessage());
-            return redirect()->back()->withErrors($e->getMessage())->withInput();
+            return redirect()->back()->withErrors(['error' => 'Erro ao salvar o usuario. Tente novamente.'])->withInput();
         }
     }
     public function delete($id){

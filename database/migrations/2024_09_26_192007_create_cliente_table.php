@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('cnpj')->nullable();
             $table->string('ie')->nullable();
             $table->timestamps();
+            $table->softDeletes(); 
         });
     }
 

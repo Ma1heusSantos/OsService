@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategoriaServico;
 use App\Models\Servicos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -15,7 +16,8 @@ class servicosController extends Controller
         return view('servicos.show',['servicos'=>$servicos]);
     }
     public function create(){
-        return view('servicos.create');
+        $categorias = CategoriaServico::all();
+        return view('servicos.create',['categorias'=>$categorias]);
     }
     public function store(Request $request){
         $valor = str_replace(['.', ','], ['', '.'], $request->valor); 
@@ -32,6 +34,7 @@ class servicosController extends Controller
              'codigo' => $request->cod_servico,
              'descricao' => $request->descricao, 
              'valor' => $valor,
+             'categoria_id'=>$request->categoria_id
          ]);
 
 

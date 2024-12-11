@@ -1,29 +1,51 @@
-<nav id="sidebar">
+<nav id="sidebar" class="d-flex flex-column" style="height: 100vh;">
     <div class="sidebar-header">
         <h3>
-            <a href="{{ url('home') }}"> {{ env('APP_NAME') }}</a>
+            <a href="{{ url('home') }}">{{ env('APP_NAME') }}</a>
         </h3>
     </div>
+    <ul class="list-unstyled components flex-grow-1">
+        <li>
+            <a href="{{ route('show.client') }}">
+                <i class="fa-solid fa-person"></i> Clientes
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('show.peca') }}">
+                <i class="fa-solid fa-cubes"></i> Componentes
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('serviceOrder.show') }}">
+                <i class="fa-solid fa-file-pen"></i> Ordens de Serviço
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-list-ul"></i> Categorias
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('show.servicos') }}">
+                <i class="fa-solid fa-wrench"></i> Serviços
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('show.users') }}">
+                <i class="fa-solid fa-user"></i> Usuários
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('show.mecanicos') }}">
+                <i class="fa-solid fa-user-gear"></i> Mecânicos
+            </a>
+        </li>
+    </ul>
     <ul class="list-unstyled components">
-
         <li>
-            <a href="#" target="_blank">
-                <i class="fas fa-desktop"></i>
-                Recarregar
+            <a href="{{ route('logout') }}">
+                <i class="fa-solid fa-sign-out-alt"></i> Logout
             </a>
         </li>
-
-        <li>
-            <a href="#pageSubmenu" aria-expanded="false" class="dropdown-toggle">
-                <i class="fas fa-cash-register"></i>
-                Usuários
-            </a>
-            <ul class="collapse list-unstyled" id="pageSubmenu">
-                <li>
-                    <a href="#">Exibir usuários</a>
-                </li>
-            </ul>
-        </li>
-        <hr>
     </ul>
 </nav>

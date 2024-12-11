@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('codigo')->nullable();
             $table->string('descricao');
             $table->decimal('valor', 8, 2)->nullable();
+            $table->foreignId('categoria_id')->constrained('categoria_servico')->onDelete('cascade'); 
             $table->timestamps();
+            $table->softDeletes(); 
         });
     }
 
@@ -25,6 +27,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('servicos', function (Blueprint $table) {
+            $table->dropForeign(['categoria_id']);
+            $table->dropColumn('categoria_id');
+        });
         Schema::dropIfExists('servicos');
     }
 };

@@ -20,24 +20,25 @@ class clientController extends Controller
         return view('client.create');
     }
     public function store(Request $request){
+        
+        Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'cpf' => 'nullable|unique:cliente,cpf|required_without:cnpj', 
+            'cnpj' => 'nullable|unique:cliente,cnpj|required_without:cpf', 
+            'telefone' => 'nullable|string|required_without:celular', 
+            'celular' => 'nullable|string|required_without:telefone', 
+            'razao_social' => 'nullable|string|max:255',
+            'ie' => 'nullable|string|max:20',
+            'rua' => 'required|string|max:255',
+            'numero' => 'required|integer',
+            'bairro' => 'required|string|max:255',
+            'complemento' => 'nullable|string|max:255',
+            'cidade' => 'required|string|max:255',
+            'estado' => 'required|string|max:12',
+            'cep' => 'required|max:9' 
+        ])->validate();   
+
         try{
-            Validator::make($request->all(), [
-                'name' => 'required|string|max:255',
-                'cpf' => 'nullable|unique:cliente,cpf|required_without:cnpj', 
-                'cnpj' => 'nullable|unique:cliente,cnpj|required_without:cpf', 
-                'telefone' => 'nullable|string|required_without:celular', 
-                'celular' => 'nullable|string|required_without:telefone', 
-                'razao_social' => 'nullable|string|max:255',
-                'ie' => 'nullable|string|max:20',
-                'rua' => 'required|string|max:255',
-                'numero' => 'required|integer',
-                'bairro' => 'required|string|max:255',
-                'complemento' => 'nullable|string|max:255',
-                'cidade' => 'required|string|max:255',
-                'estado' => 'required|string|max:12',
-                'cep' => 'required|max:9' 
-            ])->validate();   
-    
             $cliente = Cliente::create([
                 'name' => $request->name,
                 'cpf' => $request->cpf, 
@@ -63,7 +64,7 @@ class clientController extends Controller
             return redirect()->route('show.client')->with('success', 'Cliente criado com sucesso!');
         }catch(Exception $e){
             Log::info($e->getMessage());
-            return redirect()->back()->withErrors($e->getMessage())->withInput();
+            return redirect()->back()->withErrors(['error' => 'Erro ao salvar o cliente. Tente novamente.'])->withInput();
         }
     }
 

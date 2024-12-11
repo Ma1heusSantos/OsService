@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ServiceOrder extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $table ="service_order";
     protected $fillable = [
@@ -44,10 +46,14 @@ class ServiceOrder extends Model
         return $this->belongsToMany(Peca::class,'service_order_pecas')->withPivot('quantidade')->withTimestamps();;
     }
     public function servicos()
-{
-    return $this->belongsToMany(Servicos::class, 'service_order_servicos')
-                ->withPivot('quantidade', 'preco')
-                ->withTimestamps();
-}
+    {
+        return $this->belongsToMany(Servicos::class, 'service_order_servicos')
+                    ->withPivot('quantidade', 'preco')
+                    ->withTimestamps();
+    }
+    public function mecanico():BelongsTo  
+    {
+        return $this->belongsTo(Mecanico::class,'mecanico_id');
+    }
 
 }

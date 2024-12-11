@@ -11,6 +11,7 @@
                         <th scope="col">Responsavel</th>
                         <th scope="col">Categoria</th>
                         <th scope="col">Cliente</th>
+                        <th scope="col">Mecânico</th>
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
@@ -30,6 +31,7 @@
                             <td>eu</td>
                             <td>{{ $service->categoriaServico->descricao ?? 'Sem Categoria' }}</td>
                             <td>{{ $service->cliente->name ?? 'cliente não informado' }}</td>
+                            <td>{{ $service->mecanico->nome ?? 'cliente não informado' }}</td>
                             <td>
                                 <a href="{{ route('update.peca', $service->id) }}"
                                     class="btn btn-sm btn-outline-primary">Detalhes</a>

@@ -3,7 +3,8 @@
     use App\Http\Controllers\usuariosController;
     use App\Http\Controllers\homeController;
     use App\Http\Controllers\AuthController;
-    use App\Http\Middleware\Authorization;
+use App\Http\Controllers\categoryController;
+use App\Http\Middleware\Authorization;
     use App\Http\Controllers\clientController;
 use App\Http\Controllers\mecanicoController;
 use App\Http\Controllers\pecaController;
@@ -71,5 +72,19 @@ use Illuminate\Auth\Middleware\Authenticate;
             Route::get('delete/{id}', [mecanicoController::class, 'delete'])->name('delete.mecanicos');
             Route::post('saveMecanico/{id}', [mecanicoController::class, 'saveMecanico'])->name('save.mecanicos');
             Route::get('update/{id}', [mecanicoController::class, 'update'])->name('update.mecanicos');
+        });
+
+        Route::prefix('categoria')->group(function(){
+            Route::get('show',[categoryController::class,'show'])->name('show.categoria');
+            Route::get('deleteServico/{id}', [categoryController::class, 'deleteServico'])->name('delete.categoria.servico');
+            Route::post('store', [categoryController::class, 'store'])->name('store.categoria');
+            Route::get('create', [categoryController::class, 'create'])->name('create.categoria');
+            Route::get('deletePeca/{id}', [categoryController::class, 'deletePeca'])->name('delete.categoria.peca');
+
+            Route::get('updatePeca/{id}', [categoryController::class, 'updatePeca'])->name('update.categoria.peca');
+            Route::post('saveCategoriaPeca/{id}', [categoryController::class, 'saveCategoriaPeca'])->name('save.categoria.peca');
+            Route::get('updateServico/{id}', [categoryController::class, 'updateServico'])->name('update.categoria.servico');
+            Route::post('saveCategoriaServico/{id}', [categoryController::class, 'saveCategoriaServico'])->name('save.categoria.servico');
+            
         });
     });

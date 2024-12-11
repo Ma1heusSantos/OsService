@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('categoria_id');
             $table->unsignedBigInteger('cliente_id');
             $table->timestamps();
+            $table->softDeletes(); 
 
             $table->foreign("usuario_id")->references("id")->on("users");
             $table->foreign("categoria_id")->references("id")->on("categoria_servico");

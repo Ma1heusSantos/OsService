@@ -22,6 +22,19 @@
                 placeholder="Informe o valor do serviço" value="{{ $servico->valor ?? '' }}">
         </div>
 
+        <!-- Campo de Categoria do serviço -->
+        <div class="mb-3">
+            <label for="categoria" class="form-label">Categoria da peça</label>
+            <select class="form-select" id="categoria" name="categoria_id">
+                <option value="" disabled selected>Selecione a categoria</option>
+                @foreach ($categorias as $categoria)
+                    <option value={{ $categoria->id }} {{ old('categoria_id') == $categoria->id ? 'selected' : '' }}>
+                        {{ $categoria->descricao }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
         <!-- Botão de Enviar -->
         <div class="mb-3">
             <button type="submit" class="btn btn-success w-100">Salvar</button>

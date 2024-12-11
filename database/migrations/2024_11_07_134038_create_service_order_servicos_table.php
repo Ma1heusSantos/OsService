@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('quantidade')->nullable();
             $table->decimal('preco', 8, 2)->nullable();
             $table->timestamps();
+            $table->softDeletes(); 
         });
     }
 

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string("razao_social");
             $table->string("cnpj");
             $table->timestamps();
+            $table->softDeletes(); 
         });
     }
 

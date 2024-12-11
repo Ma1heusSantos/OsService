@@ -17,7 +17,6 @@ class mecanicoController extends Controller
     }
     public function store(Request $request)
 {
-    // Validação
     $request->validate([
         'nome' => 'required|string|max:255',
         'cpf' => 'nullable|unique:mecanicos,cpf', 

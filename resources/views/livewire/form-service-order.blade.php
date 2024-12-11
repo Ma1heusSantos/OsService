@@ -15,6 +15,17 @@
                 placeholder="Informe o preço do serviço">
         </div>
 
+        <!-- Campo de selção de mecânicos -->
+        <div class="mb-3">
+            <label for="mecanico_id" class="form-label">Mecanico:</label>
+            <select class="form-control" id="mecanico_id" wire:model="mecanico_id">
+                <option value="" disabled selected>Selecione um Mecânico</option>
+                @foreach ($mecanicos as $mecanico)
+                    <option value="{{ $mecanico->id }}">{{ $mecanico->nome }}</option>
+                @endforeach
+            </select>
+        </div>
+
         <!-- Campo de Categoria da peça -->
         <livewire:select-categoria :categorias="$categorias" />
 

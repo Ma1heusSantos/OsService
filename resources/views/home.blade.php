@@ -36,7 +36,7 @@
                             title="Componetes"role="button">
                             <img src="{{ asset('/assets/img_produtos.png') }}" alt="Bootstrap" width="48"
                                 height="48">
-                            Componentes
+                            Peças
                         </a>
 
                     </li>
@@ -45,13 +45,15 @@
                         <a class="nav-link icon-format" href="{{ route('serviceOrder.show') }}" data-bs-toggle="modla"
                             title="Ordem de serviço">
                             <img src="{{ asset('/assets/img_os.png') }}" alt="Bootstrap" width="48" height="48">
-                            OS
+                            Ordem de Serviço
                         </a>
                     </li>
                     <!-- imagem OBJETOS -->
                     <li class="nav-item mx-3">
-                        <a class="nav-link icon-format" href="#">
+                        <a class="nav-link icon-format" href="{{ route('show.categoria') }}" data-bs-toggle="modal"
+                            title="Serviços" role="button">
                             <img src="{{ asset('/assets/img_veiculo.png') }}" alt="Bootstrap" width="48" height="48">
+                            Categorias
                         </a>
                     </li>
                     <!-- imagem servicos -->
@@ -65,7 +67,7 @@
                     </li>
                     <!-- imagem usuarios -->
                     <li class="nav-item mx-3">
-                        <a class="nav-link icon-format" href="{{ route('show.servicos') }}" data-toggle="modal"
+                        <a class="nav-link icon-format" href="{{ route('show.users') }}" data-toggle="modal"
                             title="Usuários">
                             <img src="{{ asset('/assets/img_user.png') }}" alt="Bootstrap" width="48" height="48">
                             Usuários

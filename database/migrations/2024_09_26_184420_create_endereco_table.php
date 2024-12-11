@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string("estado");
             $table->string("cep");
             $table->timestamps();
+            $table->softDeletes(); 
         });
     }
 
