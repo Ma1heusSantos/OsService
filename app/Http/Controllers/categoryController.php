@@ -6,6 +6,7 @@ use App\Models\CategoriaPeca;
 use App\Models\CategoriaServico;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 class categoryController extends Controller
 {
@@ -33,33 +34,43 @@ class categoryController extends Controller
     public function deletePeca($id){
    
         try{
-            $categoria = CategoriaPeca::find($id);
+            $categoria = CategoriaPeca::with('pecas')->find($id);
             if (!$categoria) {
                 return redirect()->back()->withErrors('Categoria não encontrada.')->withInput();
             }else{
+                DB::beginTransaction();
+                foreach ($categoria->pecas as $peca) {
+                    $peca->delete();
+                }
                 $categoria->delete();
+                DB::commit();
             }
             return redirect()->route('show.categoria')->with('success', 'Categoria excluida com sucesso!');
         }catch(Exception $e){
             Log::info($e->getMessage());
-        }
-        
+            DB::rollback();
+        }   
     }
 
     public function deleteServico($id){
    
         try{
-            $categoria = CategoriaServico::find($id);
+            $categoria = CategoriaServico::with('servicos')->find($id);
             if (!$categoria) {
                 return redirect()->back()->withErrors('Categoria não encontrada.')->withInput();
             }else{
+                DB::beginTransaction();
+                foreach($categoria->servicos as $servicos){
+                    $servicos->delete();
+                }
                 $categoria->delete();
+                DB::commit();
             }
             return redirect()->route('show.categoria')->with('success', 'Categoria excluida com sucesso!');
         }catch(Exception $e){
             Log::info($e->getMessage());
+            DB::rollback();
         }
-        
     }
     public function updatePeca($id){
         $categoria = CategoriaPeca::find($id);

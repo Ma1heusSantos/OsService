@@ -12,7 +12,7 @@
         </li>
         <li>
             <a href="{{ route('show.peca') }}">
-                <i class="fa-solid fa-cubes"></i> Componentes
+                <i class="fa-solid fa-cubes"></i> Peças
             </a>
         </li>
         <li>
@@ -21,7 +21,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="{{ route('show.categoria') }}">
                 <i class="fa-solid fa-list-ul"></i> Categorias
             </a>
         </li>

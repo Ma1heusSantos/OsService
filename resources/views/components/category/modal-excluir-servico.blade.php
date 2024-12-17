@@ -8,6 +8,9 @@
             </div>
             <div class="modal-body">
                 <p>Tem certeza que deseja excluir a categoria <strong> {{ $categoria->descricao }} </strong>?</p>
+                <strong>
+                    Todas os serviços atrelados a ela também serão apagados !
+                </strong>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
