@@ -31,8 +31,7 @@ class categoryController extends Controller
         }
         return redirect()->route('show.categoria')->with('success', 'Categoria criada com sucesso!');
     }
-    public function deletePeca($id){
-   
+    public function deletePeca($id){ 
         try{
             $categoria = CategoriaPeca::with('pecas')->find($id);
             if (!$categoria) {

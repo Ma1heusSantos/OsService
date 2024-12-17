@@ -21,6 +21,6 @@ class CategoriaPeca extends Model
 
 
     public function pecas():HasMany{
-        return $this->hasMany(Peca::class);
+        return $this->hasMany(Peca::class,'categoria_id');
     }
 }
