@@ -28,16 +28,42 @@ class AdicionarServico extends Component
                 'id' => $servico->id,
                 'descricao' => $servico->descricao,
                 'valor' => $servico->valor,
-                'quantidade' => 1
+                'quantidade' => 0
             ];
             $this->query = '';
             $this->dispatch('atualizarServico', servico: $this->servicos);
+        }
     }
-}
+
+    public function incrementarQtd($index)
+    {
+        if (isset($this->servicos[$index])) {
+            $servico = Servicos::find($this->servicos[$index]['id']); 
+            $this->servicos[$index]['quantidade']++;
+            $this->dispatch('AdicionarNoValor', valor: $servico->valor);
+            $this->dispatch('atualizarServico', servico: $this->servicos);
+        }
+    }
+
+
+    public function decrementarQtd($index)
+    {
+        if (isset($this->servicos[$index]) && $this->servicos[$index]['quantidade'] != 0) {
+            $servico = Servicos::find($this->servicos[$index]['id']);
+            $this->servicos[$index]['quantidade'] == 0 ? $this->servicos[$index]['quantidade'] == 0 : $this->servicos[$index]['quantidade']--; 
+            $this->dispatch('diminuirNoValor', valor: $servico->valor);
+            $this->dispatch('atualizarServico', servico: $this->servicos);
+        }
+    }
+
+
 
 
     public function removeElemento($index){
         if (isset($this->servicos[$index])) {
+            $servico = Servicos::find($this->servicos[$index]['id']);
+            $valorRemover = $this->servicos[$index]['quantidade'] * $servico->valor;
+            $this->dispatch('removerValorItem', valor: $valorRemover);
             unset($this->servicos[$index]);
             $this->servicos = array_values($this->servicos); 
             $this->dispatch('atualizarServico', servico: $this->servicos);

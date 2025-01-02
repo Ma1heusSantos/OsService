@@ -23,7 +23,7 @@
 
 @section('conteudo')
     <div class="d-flex full-height">
-        <!-- Lado esquerdo (bg-black) -->
+        <!-- Lado esquerdo -->
         <div class="w-50 d-flex align-items-center justify-content-center text-white">
             <div class="col-md-6 left-side d-flex flex-column justify-content-center">
                 <h2 class="mb-4 text-black">Os Service</h2>
@@ -40,13 +40,13 @@
                         <input type="password" class="form-control" name='password' id="password"
                             placeholder="min 8 chars">
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                    <button type="submit" style="background-color:#6f42c1;" class="btn btn-primary w-100">Login</button>
                 </form>
             </div>
         </div>
 
         <!-- Lado direito (bg-primary) -->
-        <div class="w-50 bg-primary d-flex align-items-center justify-content-center text-white">
+        <div style="background-color:#6f42c1;" class="w-50 d-flex align-items-center justify-content-center text-white">
             <div class="col-md-6 right-side">
                 <h2>The simplest way to manage your workforce</h2>
                 <p>Enter your credentials to access your account</p>

@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\CategoriaServico;
 use App\Models\Cliente;
+use App\Models\Mecanico;
 use App\Models\ServiceOrder;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -17,28 +18,25 @@ class FormServiceOrder extends Component
     public $cod_service;
     public $nome;
     public $preco;
-    public $categoria_id = ''; 
+    public $categoria = ''; 
     public $descricao;
     public $mecanicos;
     public $mecanico_id; 
-    public $cliente_id;
+    public $cliente;
     public $servicos = [];
     public $clientes;
     public $pecasSelecionadas = []; 
-    // protected $rules = [
-    //     'descricao' => 'required|string',
-    //     'preco' => 'required',
-    //     'categoria_id' => 'required|string|exists:categoria_servicos,descricao',
-    // ];
+    protected $rules = [
+        'mecanico_id' => 'required',
+        'cliente' => 'required',
+        'categoria' => 'required',
+    ];
     
-    // protected $messages = [
-    //     'descricao.required' => 'O campo descrição é obrigatório.',
-    //     'preco.required' => 'O campo preço é obrigatório.',
-    //     'cliente_id.required' => 'O campo cliente é obrigatório.',
-    //     'cliente_id.exists' => 'O cliente informado não foi encontrado.',
-    //     'categoria_id.required' => 'O campo categoria é obrigatório.',
-    //     'categoria_id.exists' => 'A categoria informada não foi encontrada.',
-    // ];
+    protected $messages = [
+        'cliente_id.required' => 'O campo cliente é obrigatório.',
+        'mecanico_id.required' => 'O campo mecânico é obrigatório.',
+        'categoria_id.required' => 'O campo categoria é obrigatório.',
+    ];
 
     protected $listeners = ['atualizarPecas','atualizarCategoria','atualizarCliente','atualizarServico'];
     
@@ -51,7 +49,7 @@ class FormServiceOrder extends Component
     #[On('atualizarCategoria')]    
     public function atualizarCategoria($categoria_id)
     {
-        $this->categoria_id = $categoria_id;
+        $this->categoria = $categoria_id;
     }
 
     #[On('atualizarServico')]    
@@ -60,20 +58,47 @@ class FormServiceOrder extends Component
         $this->servicos = $servico;
     }
 
+    #[On('AdicionarNoValor')]    
+    public function AdicionarNoValor($valor)
+    {
+        $this->preco += $valor;
+    }
+
+    #[On('diminuirNoValor')]    
+    public function dimunuirNoValor($valor)
+    {
+        if ($this->preco === 0) {
+            $this->preco = 0;
+        }else{
+            $this->preco -= $valor;
+        }
+        
+    }
+
+    #[On('removerValorItem')]    
+    public function removerValorItem($valor)
+    {
+        if ($this->preco === 0) {
+            $this->preco = 0;
+        }else{
+            $this->preco -= $valor;
+        }
+    }
+
     #[On('atualizarCliente')]
     public function atualizarCliente($cliente_id)
     {
-        $this->cliente_id = $cliente_id; 
+        $this->cliente = $cliente_id; 
     }
 
     public function submitForm()
     {
         try {
-            // $this->validate();
-            $cliente = Cliente::where('name', 'LIKE', '%' . $this->cliente_id . '%')->first();
-            $categoria = CategoriaServico::where('descricao', 'LIKE', '%' . $this->categoria_id . '%')->first();
+            $this->validate();
+            $cliente = Cliente::where('name', 'LIKE', '%' . $this->cliente . '%')->first();
+            $categoria = CategoriaServico::where('descricao', 'LIKE', '%' . $this->categoria . '%')->first();
             $preco = str_replace(',', '.', str_replace('.', '', $this->preco));
-
+            
             
             $serviceOrder = ServiceOrder::create([
                 'descricao' => $this->descricao,
@@ -81,8 +106,8 @@ class FormServiceOrder extends Component
                 'status' => 'Em andamento',
                 'usuario_id' => Auth::user()->id,
                 'categoria_id' => $categoria->id,
-                'mecanico_id'=>$this->mecanico_id,
-                'cliente_id' => $cliente->id,
+                'mecanico_id'=> $this->mecanico_id,
+                'cliente_id' => $cliente->id
             ]);
             foreach ($this->pecasSelecionadas as $peca) {
                 $serviceOrder->pecas()->attach($peca['id'], ['quantidade' => $peca['quantidade'],]);
@@ -90,7 +115,7 @@ class FormServiceOrder extends Component
             foreach ($this->servicos as $servico) {
                 $serviceOrder->servicos()->attach($servico['id'], ['quantidade' => $servico['quantidade'],'preco' => $servico['valor'],]);
             }
-            dd($serviceOrder);
+
             session()->flash('message', 'Ordem de serviço criada com sucesso!');
             return redirect()->route('serviceOrder.show');
         
@@ -104,4 +129,12 @@ class FormServiceOrder extends Component
     {
         return view('livewire.form-service-order');
     }
+
+    public function mount()
+{
+    $this->mecanicos = Mecanico::all();
+    $this->clientes = Cliente::all();
+    $this->categorias = CategoriaServico::all();
+}
+
 }

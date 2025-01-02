@@ -19,7 +19,7 @@ class mecanicoController extends Controller
 {
     $request->validate([
         'nome' => 'required|string|max:255',
-        'cpf' => 'nullable|unique:mecanicos,cpf', 
+        'cpf' => 'required|unique:mecanicos,cpf', 
         'telefone' => 'nullable|string',
         'especialidade' => 'nullable|string|max:255',
         'data_nascimento' => ['required', 'date', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')],

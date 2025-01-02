@@ -6,7 +6,7 @@
                 placeholder="Digite o nome da peça para buscar" autocomplete="off">
             <button type="button" class="btn col-4" wire:click="adicionarPeca"
                 style="background-color:#6f42c1;color:#fff">
-                Adicionar uma nova peça
+                Adicionar
             </button>
         </div>
 
@@ -33,13 +33,18 @@
             <h5>Peças Adicionadas:</h5>
             @foreach ($pecas as $index => $peca)
                 <div class="d-flex align-items-center mb-2">
-                    <span class="me-3">{{ $peca['nome'] }}</span>
                     <button type="button" class="btn btn-sm btn-secondary me-2"
                         wire:click="incrementarQtd({{ $index }})">+</button>
-                    <input type="text" class="text-center" style="width: 2.0rem" value="{{ $peca['quantidade'] }}"
-                        readonly>
-                    <button type="button" class="btn btn-sm btn-secondary ms-2"
+
+                    <input type="text" class="text-center mr-2" style="width: 2.0rem"
+                        value="{{ $peca['quantidade'] }}" readonly>
+
+                    <button type="button" class="btn btn-sm btn-secondary me-2"
                         wire:click="decrementarQtd({{ $index }})">-</button>
+
+                    <span class="me-3">{{ $peca['nome'] }}</span>
+                    <button type="button" class="btn btn-sm btn-danger ms-2"
+                        wire:click="removeElemento({{ $index }})">x</button>
                 </div>
             @endforeach
         </div>

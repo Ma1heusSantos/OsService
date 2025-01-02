@@ -3,17 +3,19 @@
     use App\Http\Controllers\usuariosController;
     use App\Http\Controllers\homeController;
     use App\Http\Controllers\AuthController;
-use App\Http\Controllers\categoryController;
-use App\Http\Middleware\Authorization;
+    use App\Http\Controllers\categoryController;
+    use App\Http\Middleware\Authorization;
     use App\Http\Controllers\clientController;
-use App\Http\Controllers\mecanicoController;
-use App\Http\Controllers\pecaController;
+    use App\Http\Controllers\mecanicoController;
+    use App\Http\Controllers\pecaController;
     use App\Http\Controllers\serviceOrderController;
-use App\Http\Controllers\servicosController;
-use Illuminate\Auth\Middleware\Authenticate;
+    use App\Http\Controllers\servicosController;
+
 
     Route::get('/', [AuthController::class, 'auth'])->name('login')->withoutMiddleware(Authorization::class);
     Route::post('autenticaUsuario', [AuthController::class, 'autenticaUsuario'])->name('autentica.Usuario');
+    Route::get('home', [homeController::class, 'home'])->name('home');
+    Route::get('logout',[AuthController::class,'logout'])->name('logout');
 
     Route::middleware(Authorization::class)->group(function () {
         Route::prefix('users')->group(function () {
@@ -46,14 +48,11 @@ use Illuminate\Auth\Middleware\Authenticate;
 
         Route::prefix('ServiceOrder')->group(function(){
             Route::get('show',[serviceOrderController::class,'show'])->name('serviceOrder.show');
+            Route::get('details/{id}',[serviceOrderController::class,'details'])->name('serviceOrder.details');
             Route::post('store', [serviceOrderController::class, 'store'])->name('store.service');
             Route::get('create', [serviceOrderController::class, 'create'])->name('create.service');
-            //ainda falta implementar o update e o delete dessas rotas.
+            Route::get('delete/{id}', [serviceOrderController::class, 'delete'])->name('delete.service');
         });
-
-        Route::get('home', [homeController::class, 'home'])->name('home');
-        Route::get('logout',[AuthController::class,'logout'])->name('logout');
-
 
         Route::prefix('Servicos')->group(function(){
             Route::get('show',[servicosController::class,'show'])->name('show.servicos');
@@ -80,11 +79,9 @@ use Illuminate\Auth\Middleware\Authenticate;
             Route::post('store', [categoryController::class, 'store'])->name('store.categoria');
             Route::get('create', [categoryController::class, 'create'])->name('create.categoria');
             Route::get('deletePeca/{id}', [categoryController::class, 'deletePeca'])->name('delete.categoria.peca');
-
             Route::get('updatePeca/{id}', [categoryController::class, 'updatePeca'])->name('update.categoria.peca');
             Route::post('saveCategoriaPeca/{id}', [categoryController::class, 'saveCategoriaPeca'])->name('save.categoria.peca');
             Route::get('updateServico/{id}', [categoryController::class, 'updateServico'])->name('update.categoria.servico');
             Route::post('saveCategoriaServico/{id}', [categoryController::class, 'saveCategoriaServico'])->name('save.categoria.servico');
-            
         });
     });

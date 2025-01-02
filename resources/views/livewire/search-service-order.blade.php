@@ -6,12 +6,11 @@
             <table class="table table-hover align-middle bg-white shadow-sm rounded">
                 <thead class="table-light">
                     <tr class="text-center">
-                        <th scope="col">Preço</th>
+                        <th scope="col">Valor</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Responsavel</th>
-                        <th scope="col">Categoria</th>
-                        <th scope="col">Cliente</th>
                         <th scope="col">Mecânico</th>
+                        <th scope="col">Categoria da O.S</th>
+                        <th scope="col">Cliente</th>
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
@@ -28,13 +27,19 @@
                             @else
                                 <td class="text-secondary">{{ $service->status }}</td>
                             @endif
-                            <td>eu</td>
+                            <td>{{ $service->mecanico->nome ?? 'cliente não informado' }}</td>
                             <td>{{ $service->categoriaServico->descricao ?? 'Sem Categoria' }}</td>
                             <td>{{ $service->cliente->name ?? 'cliente não informado' }}</td>
-                            <td>{{ $service->mecanico->nome ?? 'cliente não informado' }}</td>
                             <td>
-                                <a href="{{ route('update.peca', $service->id) }}"
-                                    class="btn btn-sm btn-outline-primary">Detalhes</a>
+                                <div class="btn-group">
+                                    <a href="{{ route('serviceOrder.details', $service->id) }}"
+                                        class="btn btn-sm btn-outline-primary mr-2">Detalhes</a>
+                                    <a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#modalExcluir{{ $service->id }}"
+                                        class="btn btn-sm btn-outline-danger delete-user"> Excluir
+                                    </a>
+                                    <x-serviceOrder.modal-excluir :service="$service" />
+                                </div>
                             </td>
                         </tr>
                     @endforeach

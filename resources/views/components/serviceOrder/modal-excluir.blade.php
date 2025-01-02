@@ -11,7 +11,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <a href="{{ route('delete.peca', [$service->id]) }}" class="btn btn-danger">Excluir</a>
+                <a href="{{ route('delete.service', [$service->id]) }}" class="btn btn-danger">Excluir</a>
             </div>
         </div>
     </div>

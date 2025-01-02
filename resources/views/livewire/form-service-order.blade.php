@@ -8,38 +8,53 @@
                 placeholder="Insira aqui a descrição do serviço"></textarea>
         </div>
 
-        <!-- Campo de preço -->
-        <div class="mb-3">
-            <label for="preco" class="form-label">Preço:</label>
-            <input type="text" class="form-control money" id="preco" wire:model="preco"
-                placeholder="Informe o preço do serviço">
+        <div>
+            <p class="fw-bold"style="color:#6f42c1;">R$ {{ money($preco) }}</p>
         </div>
 
-        <!-- Campo de selção de mecânicos -->
-        <div class="mb-3">
-            <label for="mecanico_id" class="form-label">Mecanico:</label>
-            <select class="form-control" id="mecanico_id" wire:model="mecanico_id">
-                <option value="" disabled selected>Selecione um Mecânico</option>
-                @foreach ($mecanicos as $mecanico)
-                    <option value="{{ $mecanico->id }}">{{ $mecanico->nome }}</option>
-                @endforeach
-            </select>
-        </div>
 
         <!-- Campo de Categoria da peça -->
         <livewire:select-categoria :categorias="$categorias" />
+        @error('categoria_id')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
 
-        <!-- Campo de Seleção de Cliente -->
-        <livewire:select-cliente />
+        <div class="row">
+            <!-- Campo de selção de mecânicos -->
+            <div class="col-md-6">
+                <label for="mecanico_id" class="form-label">Mecânico:</label>
+                <select class="form-control" id="mecanico_id" wire:model="mecanico_id">
+                    <option value="" selected>Selecione um Mecânico</option>
+                    @foreach ($mecanicos as $mecanico)
+                        <option value="{{ $mecanico->id }}">{{ $mecanico->nome }}</option>
+                    @endforeach
+                </select>
+                @error('mecanico_id')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="col-md-6">
+                <!-- Campo de Seleção de Cliente -->
+                <livewire:select-cliente />
+            </div>
+            @error('cliente_id')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
 
-        <!-- Campo de Seleção de Serviço -->
-        <livewire:adicionar-servico />
 
-        <!-- Componente que mostra a quantidade de peças -->
-        <livewire:buscar-peca id="buscarPecaComponent" />
+        <div class="row mb-3 d-flex">
+            <div class="col-md-6">
+                <!-- Campo de Seleção de Serviço -->
+                <livewire:adicionar-servico />
+            </div>
+            <div class="col-md-6">
+                <!-- Componente que mostra a quantidade de peças -->
+                <livewire:buscar-peca id="buscarPecaComponent" />
 
-        <input type="hidden" wire:model="pecas">
-
+                <input type="hidden" wire:model="pecas">
+            </div>
+        </div>
         <!-- Botão de Enviar -->
         <div class="mb-3 mt-5">
             <button type="submit" class="btn btn-success w-100">Salvar</button>

@@ -65,6 +65,23 @@
                             Serviços
                         </a>
                     </li>
+                    <!-- imagem mecanicos -->
+                    <li class="nav-item mx-3">
+                        <a class="nav-link icon-format" href="{{ route('show.mecanicos') }}" data-toggle="modal"
+                            title="Mecanicos">
+                            <img src="{{ asset('/assets/carro.png') }}" alt="Bootstrap" width="48" height="48">
+                            Veicúlos
+                        </a>
+                    </li>
+                    <!-- imagem mecanicos -->
+                    <li class="nav-item mx-3">
+                        <a class="nav-link icon-format" href="{{ route('show.mecanicos') }}" data-toggle="modal"
+                            title="Veiculos">
+                            <img src="{{ asset('/assets/usuario-mecanico.png') }}" alt="Bootstrap" width="48"
+                                height="48">
+                            Mecânicos
+                        </a>
+                    </li>
                     <!-- imagem usuarios -->
                     <li class="nav-item mx-3">
                         <a class="nav-link icon-format" href="{{ route('show.users') }}" data-toggle="modal"
@@ -73,21 +90,6 @@
                             Usuários
                         </a>
                     </li>
-                    <!-- imagem mecanicos -->
-                    <li class="nav-item mx-3">
-                        <a class="nav-link icon-format" href="{{ route('show.mecanicos') }}" data-toggle="modal"
-                            title="Usuários">
-                            <img src="{{ asset('/assets/usuario-mecanico.png') }}" alt="Bootstrap" width="48"
-                                height="48">
-                            Mecânicos
-                        </a>
-                    </li>
-                    {{-- <li class="nav-item mx-3">
-                    <a class="nav-link icon-format" href="#cadempresa" data-bs-toggle="modal" title="Empresa" role="button">
-                        <img src="{{ Vite::asset('public/img_empresa.png') }}" alt="Bootstrap" width="48" height="48">
-                        Empresas
-                    </a>
-                </li> --}}
                     <li class="nav-item mx-3">
                         <a class="nav-link icon-format" href="{{ route('logout') }}" data-bs-toggle="modal"
                             title="Serviços" role="button">

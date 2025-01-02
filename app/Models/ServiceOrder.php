@@ -21,6 +21,7 @@ class ServiceOrder extends Model
         'status',
         'usuario_id',
         'categoria_id',
+        'mecanico_id',
         'cliente_id',
     ];
 

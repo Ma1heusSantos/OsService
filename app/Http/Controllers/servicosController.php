@@ -54,8 +54,8 @@ class servicosController extends Controller
             }
             return redirect()->route('show.servicos');
         }catch(Exception $e){
-        Log::info($e->getMessage());
-    }
+            Log::info($e->getMessage());
+        }
     }
     public function update($id){
         $servico = Servicos::find($id);
