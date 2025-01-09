@@ -41,4 +41,9 @@ class Cliente extends Model
     {
         return $this->hasMany(ServiceOrder::class);
     }
+
+    public function veiculos():hasMany
+    {
+        return $this->hasMany(Veiculo::class);
+    }
 }

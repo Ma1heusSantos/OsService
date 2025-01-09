@@ -93,8 +93,8 @@ class FormServiceOrder extends Component
 
     public function submitForm()
     {
+        $this->validate();
         try {
-            $this->validate();
             $cliente = Cliente::where('name', 'LIKE', '%' . $this->cliente . '%')->first();
             $categoria = CategoriaServico::where('descricao', 'LIKE', '%' . $this->categoria . '%')->first();
             $preco = str_replace(',', '.', str_replace('.', '', $this->preco));

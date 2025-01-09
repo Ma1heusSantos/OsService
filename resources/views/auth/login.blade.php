@@ -8,24 +8,24 @@
     <style>
         html,
         body {
-            height: 100%; 
+            height: 100%;
             background-color: #6F42C1;
-            
+
         }
 
         .full-height {
             height: 100vh;
         }
-        label, button, input {
+
+        label,
+        button,
+        input {
             font-family: "Ubuntu Sans", serif;
         }
-        
-        h2{
+
+        h2 {
             font-family: "Luminari", fantasy;
         }
-
-       
- 
     </style>
 @endsection
 
@@ -39,7 +39,7 @@
                 <form method="post" action="{{ route('autentica.Usuario') }}">
                     @csrf
                     <div class="mb-3">
-                    <label for="email" class="form-label">E-mail</label>
+                        <label for="email" class="form-label">E-mail</label>
                         <input type="email" class="form-control" id="email" name="email"
                             placeholder="Enter your email">
                     </div>
@@ -55,11 +55,8 @@
 
         <!-- Lado direito (bg-primary) -->
         <div style="background-color:#6f42c1;" class="w-50 d-flex align-items-center justify-content-center text-white  ">
-
-        <div style="width: 100%; height: 100%; background: url({{ asset('assets/imagemLogin.jpg') }}); background-repeat: no-repeat; background-size: cover; background-position: center;">
-        </div>
-
+            <div
+                style="width: 100%; height: 100%; background: url({{ asset('assets/imagemLogin.jpg') }}); background-repeat: no-repeat; background-size: cover; background-position: center;">
             </div>
         </div>
-    </div>
-@endsection
+    @endsection

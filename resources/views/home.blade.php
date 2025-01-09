@@ -65,9 +65,9 @@
                             Serviços
                         </a>
                     </li>
-                    <!-- imagem mecanicos -->
+                    <!-- imagem veiculos -->
                     <li class="nav-item mx-3">
-                        <a class="nav-link icon-format" href="{{ route('show.mecanicos') }}" data-toggle="modal"
+                        <a class="nav-link icon-format" href="{{ route('show.veiculos') }}" data-toggle="modal"
                             title="Mecanicos">
                             <img src="{{ asset('/assets/carro.png') }}" alt="Bootstrap" width="48" height="48">
                             Veicúlos
