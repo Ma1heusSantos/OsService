@@ -17,22 +17,57 @@
             height: 100vh;
         }
 
-        label,
-        button,
-        input {
+        label, button, input {
             font-family: "Ubuntu Sans", serif;
         }
-
-        h2 {
-            font-family: "Luminari", fantasy;
+        
+        h2{
+            font-family: "Playfair Display", serif;
         }
+
+        .ladoDireito2 {
+        width: 50%; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        color: #ffffff; 
+        }
+
+
+        .ladoEsquerdo {
+        width: 50%; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        color: #ffffff; 
+        background-color: #866ec7;
+        }
+
+
+        
+        @media screen and (max-width: 450px) {
+            
+            .ladoDireito{
+                display: none;
+               
+            }
+            .ladoDireito2{
+                display: none;
+            }
+
+            .ladoEsquerdo{
+                flex: 1;
+            }
+            
+        }
+
     </style>
 @endsection
 
 @section('conteudo')
     <div class="d-flex full-height">
-        <!-- Lado esquerdo -->
-        <div class="w-50 d-flex align-items-center justify-content-center text-white">
+        <!-- Lado esquerdo -->   
+        <div  class="ladoEsquerdo">
             <div class="col-md-6 left-side d-flex flex-column justify-content-center">
                 <h2 class="mb-4 text-center">Os Service</h2>
                 <!-- Form -->
@@ -52,11 +87,12 @@
                 </form>
             </div>
         </div>
-
+       
         <!-- Lado direito (bg-primary) -->
-        <div style="background-color:#6f42c1;" class="w-50 d-flex align-items-center justify-content-center text-white  ">
-            <div
-                style="width: 100%; height: 100%; background: url({{ asset('assets/imagemLogin.jpg') }}); background-repeat: no-repeat; background-size: cover; background-position: center;">
-            </div>
+
+        <div   class="ladoDireito2" >
+        <div  class="ladoDireito" style="width: 100%; height: 100%; background: url({{ asset('assets/imagemLogin.jpg') }}); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
         </div>
-    @endsection
+    </div><!-- Div principal -->
+@endsection
+

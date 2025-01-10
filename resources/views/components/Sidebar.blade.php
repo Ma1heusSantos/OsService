@@ -1,4 +1,5 @@
 <nav id="sidebar" class="d-flex flex-column" style="height: 100vh;">
+    <div class="flex-grow-1 justify-content-between">
     <div class="sidebar-header">
         <h3>
             <a href="{{ url('home') }}">{{ env('APP_NAME') }}</a>
@@ -41,11 +42,14 @@
             </a>
         </li>
     </ul>
-    <ul class="list-unstyled components">
+    </div>
+    <div class="btnLogout">
+    <ul class="list-unstyled components">  <!-- botão logout -->
         <li>
             <a href="{{ route('logout') }}">
                 <i class="fa-solid fa-sign-out-alt"></i> Logout
             </a>
         </li>
     </ul>
+    </div>
 </nav>
