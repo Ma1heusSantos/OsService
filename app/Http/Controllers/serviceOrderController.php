@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\CategoriaServico;
 use App\Models\Cliente;
+use App\Models\Empresa;
 use App\Models\Mecanico;
 use App\Models\ServiceOrder;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class serviceOrderController extends Controller
@@ -46,5 +48,18 @@ class serviceOrderController extends Controller
             'mecanico'
         ])->find($id);
         return view('serviceOrder.details',['serviceOrder'=> $serviceOrder]);
+    }
+
+    public function imprimir($id){
+        $empresa = Empresa::find(Auth::user()->empresa_id);
+        $serviceOrder = ServiceOrder::with([
+            'cliente', 
+            'categoriaServico', 
+            'user', 
+            'pecas', 
+            'servicos', 
+            'mecanico'
+        ])->find($id);
+        return view('serviceOrder.imprimir',['serviceOrder'=> $serviceOrder,'empresa'=>$empresa]);
     }
 }

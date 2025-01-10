@@ -12,7 +12,6 @@
             <p class="fw-bold"style="color:#6f42c1;">R$ {{ money($preco) }}</p>
         </div>
 
-
         <!-- Campo de Categoria da peça -->
         <livewire:select-categoria :categorias="$categorias" />
         @error('categoria_id')
