@@ -13,7 +13,7 @@
                 style="background-color:#6f42c1; color:#fff">Adicionar um novo Veiculo</a>
         </div>
         <div class="card-body">
-            <livewire:search-veiculo :veiculos="$veiculos" />
+            <livewire:buscar-veiculo :veiculos="$veiculos" />
         </div>
     </div>
 @endsection

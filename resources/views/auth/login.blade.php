@@ -17,57 +17,59 @@
             height: 100vh;
         }
 
-        label, button, input {
+        label,
+        button,
+        input {
             font-family: "Ubuntu Sans", serif;
         }
-        
-        h2{
+
+        h2 {
             font-family: "Playfair Display", serif;
         }
 
         .ladoDireito2 {
-        width: 50%; 
-        display: flex; 
-        align-items: center; 
-        justify-content: center; 
-        color: #ffffff; 
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
         }
 
 
         .ladoEsquerdo {
-        width: 50%; 
-        display: flex; 
-        align-items: center; 
-        justify-content: center; 
-        color: #ffffff; 
-        background-color: #866ec7;
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            background-color: #866ec7;
         }
 
 
-        
+
         @media screen and (max-width: 450px) {
-            
-            .ladoDireito{
+
+            .ladoDireito {
                 display: none;
-               
+
             }
-            .ladoDireito2{
+
+            .ladoDireito2 {
                 display: none;
             }
 
-            .ladoEsquerdo{
+            .ladoEsquerdo {
                 flex: 1;
             }
-            
-        }
 
+        }
     </style>
 @endsection
 
 @section('conteudo')
     <div class="d-flex full-height">
-        <!-- Lado esquerdo -->   
-        <div  class="ladoEsquerdo">
+        <!-- Lado esquerdo -->
+        <div class="ladoEsquerdo">
             <div class="col-md-6 left-side d-flex flex-column justify-content-center">
                 <h2 class="mb-4 text-center">Os Service</h2>
                 <!-- Form -->
@@ -87,12 +89,13 @@
                 </form>
             </div>
         </div>
-       
+
         <!-- Lado direito (bg-primary) -->
 
-        <div   class="ladoDireito2" >
-        <div  class="ladoDireito" style="width: 100%; height: 100%; background: url({{ asset('assets/imagemLogin.jpg') }}); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
+        <div class="ladoDireito2">
+            <div class="ladoDireito"
+                style="width: 100%; height: 100%; background: url({{ asset('assets/imagemLogin.jpg') }}); background-repeat: no-repeat; background-size: cover; background-position: center;">
+            </div>
         </div>
     </div><!-- Div principal -->
 @endsection
-
