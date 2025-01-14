@@ -1,23 +1,13 @@
 <div class="form-group">
     <form wire:submit="submitForm">
         @csrf
-        <!-- Campo de nome -->
-        <div class="mb-3">
-            <label for="nome" class="form-label">Descrição:</label>
-            <textarea type="text" class="form-control" id="descricao" wire:model="descricao"
-                placeholder="Insira aqui a descrição do serviço"></textarea>
-        </div>
-
-        <div>
-            <p class="fw-bold"style="color:#6f42c1;">R$ {{ money($preco) }}</p>
-        </div>
-
+    
         <!-- Campo de Categoria da peça -->
         <livewire:select-categoria :categorias="$categorias" />
         @error('categoria_id')
             <span class="text-danger">{{ $message }}</span>
         @enderror
-
+        
         <div class="row">
             <!-- Campo de selção de mecânicos -->
             <div class="col-md-6">
@@ -42,7 +32,27 @@
         </div>
 
 
-        <div class="row mb-3 d-flex">
+      
+
+         <!-- Campo de nome -->
+         <div class="mb-3 d-flex align-items-center">
+    <!-- Campo de descrição -->
+    <div style="flex: 1; margin-right: 15px;">
+        <label for="nome" class="form-label">Descrição:</label>
+        <textarea type="text" class="form-control" id="descricao" wire:model="descricao"
+            placeholder="Insira aqui a descrição do serviço" style="width: 718px; height: 60px;"></textarea>
+    </div>
+
+    <!-- Campo de valor total -->
+    <div style="flex: 1;margin-left: 160px; ">
+        <label for="valorTotal" class="form-label">Valor Total do Serviço:</label>
+        <div class="form-control" style="height: 80px; width: 260px; text-align-center;">
+            <p class="fw-bold" style="color: #6f42c1; margin: 0; font-size: 40px;">R$ {{ money($preco) }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-3 d-flex">
             <div class="col-md-6">
                 <!-- Campo de Seleção de Serviço -->
                 <livewire:adicionar-servico />
