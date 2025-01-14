@@ -5,7 +5,6 @@ namespace App\Livewire;
 use App\Models\Cliente;
 use Livewire\Component;
 use App\Models\Veiculo;
-
 use Illuminate\Support\Facades\Log;
 use Exception;
 use Livewire\Attributes\On;
@@ -51,7 +50,6 @@ class FormVeiculo extends Component
     {
         $cliente = Cliente::where('name', 'like', '%' . $this->cliente . '%')->first();
         $this->validate();
-
         try {
             $path = $this->imagem ? $this->imagem->store('veiculos', 'public') : null;
 

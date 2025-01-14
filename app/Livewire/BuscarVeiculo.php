@@ -12,14 +12,18 @@ class BuscarVeiculo extends Component
 
     public function mount() 
     {
-        $this->veiculos = Veiculo::all(); 
+        $this->veiculos = Veiculo::with('cliente')->get();
     }
+    
     public function render()
     {
-        $this->veiculos = Veiculo::where('modelo', 'LIKE', '%' . $this->search . '%')
+        $this->veiculos = Veiculo::with('cliente') 
+            ->where('modelo', 'LIKE', '%' . $this->search . '%')
             ->orWhere('placa', 'LIKE', '%' . $this->search . '%')
             ->orWhere('chassi', 'LIKE', '%' . $this->search . '%')
-            ->get(); 
+            ->get();
+    
         return view('livewire.buscar-veiculo');
     }
+    
 }

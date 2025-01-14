@@ -55,7 +55,24 @@ class veiculosController extends Controller
             return redirect()->back()->withErrors(['error' => 'Erro ao salvar o veículo. Tente novamente.'])->withInput();
         }
     }
-    public function delete(){}
+    public function delete($id)
+    {
+        try{
+            $veiculo = Veiculo::find($id);
+            if (!$veiculo) {
+                return redirect()->back()->withErrors('Veiculo não encontrado.')->withInput();
+            }else{
+                $veiculo->delete();
+                return redirect()->route('show.veiculos');
+            }
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+        }
+    }
     public function saveVeiculos(){}
-    public function update(){}
+    public function update($id)
+    {
+        $veiculo = Veiculo::with('cliente')->find($id);
+        return view('veiculos.update',['veiculo'=> $veiculo]);
+    }
 }

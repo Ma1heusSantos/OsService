@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Veiculo extends Model
 {
-    use HasFactory;
+    use HasFactory ,SoftDeletes;
 
     protected $fillable = [
         'marca',
@@ -27,7 +28,7 @@ class Veiculo extends Model
 
     public function cliente():BelongsTo
     {
-        return $this->belongsTo(CategoriaPeca::class, 'cliente_id');
+        return $this->belongsTo(Cliente::class, 'cliente_id');
     }
 
     public function getImagemAttribute($value)

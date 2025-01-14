@@ -10,8 +10,7 @@
             <h4 class="fw-bold" style="color:#6f42c1;">Alterar Mecânico</h4>
         </div>
         <div class="card-body">
-            <x-mecanicos.form :mecanico="$mecanico" :action="route('save.mecanicos', [$mecanico->id])" />
-
+            <livewire:form-veiculo />
         </div>
     </div>
 @endsection
