@@ -128,13 +128,13 @@
 
             <!-- Botões de Ações -->
             <div class="d-flex justify-content-end mt-4">
-                {{-- <div class="btn-group">
-                    <a href="{{ route('serviceOrder.edit', $serviceOrder->id) }}"
-                        class="btn btn-sm btn-outline-warning mr-3">Editar</a>
+                <div class="btn-group">
+                    <a href="{{ route('imprimir.service', $serviceOrder->id) }}"
+                        class="btn btn-sm btn-outline-warning mr-3">Imprimir</a>
                     <a href="#" data-bs-toggle="modal" data-bs-target="#modalExcluir{{ $serviceOrder->id }}"
                         class="btn btn-sm btn-outline-danger delete-service-order">Excluir</a>
-                    <x-mecanicos.modal-excluir :serviceOrder="$serviceOrder" />
-                </div> --}}
+                    <x-serviceOrder.modal-excluir :service="$serviceOrder" />
+                </div>
             </div>
         </div>
     </div>

@@ -8,9 +8,9 @@
     <style>
         html,
         body {
-            height: 100%; 
-            
-            
+            height: 100%;
+            background-color: #6F42C1;
+
         }
 
         .full-height {
@@ -61,8 +61,6 @@
             
         }
 
-        
-       
     </style>
 @endsection
 
@@ -76,7 +74,7 @@
                 <form method="post" action="{{ route('autentica.Usuario') }}">
                     @csrf
                     <div class="mb-3">
-                    <label for="email" class="form-label">E-mail</label>
+                        <label for="email" class="form-label">E-mail</label>
                         <input type="email" class="form-control" id="email" name="email"
                             placeholder="Enter your email">
                     </div>
@@ -91,8 +89,10 @@
         </div>
        
         <!-- Lado direito (bg-primary) -->
+
         <div   class="ladoDireito2" >
         <div  class="ladoDireito" style="width: 100%; height: 100%; background: url({{ asset('assets/imagemLogin.jpg') }}); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
         </div>
     </div><!-- Div principal -->
 @endsection
+

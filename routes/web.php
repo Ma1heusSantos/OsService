@@ -10,7 +10,7 @@
     use App\Http\Controllers\pecaController;
     use App\Http\Controllers\serviceOrderController;
     use App\Http\Controllers\servicosController;
-
+use App\Http\Controllers\veiculosController;
 
     Route::get('/', [AuthController::class, 'auth'])->name('login')->withoutMiddleware(Authorization::class);
     Route::post('autenticaUsuario', [AuthController::class, 'autenticaUsuario'])->name('autentica.Usuario');
@@ -52,6 +52,7 @@
             Route::post('store', [serviceOrderController::class, 'store'])->name('store.service');
             Route::get('create', [serviceOrderController::class, 'create'])->name('create.service');
             Route::get('delete/{id}', [serviceOrderController::class, 'delete'])->name('delete.service');
+            Route::get('imprimir/{id}', [serviceOrderController::class, 'imprimir'])->name('imprimir.service');
         });
 
         Route::prefix('Servicos')->group(function(){
@@ -61,6 +62,15 @@
             Route::get('delete/{id}', [servicosController::class, 'delete'])->name('delete.servicos');
             Route::post('saveServico/{id}', [servicosController::class, 'saveServico'])->name('save.servicos');
             Route::get('update/{id}', [servicosController::class, 'update'])->name('update.servicos');
+        });
+
+        Route::prefix('veiculos')->group(function(){
+            Route::get('show',[veiculosController::class,'show'])->name('show.veiculos');
+            Route::post('store', [veiculosController::class, 'store'])->name('store.veiculos');
+            Route::get('create', [veiculosController::class, 'create'])->name('create.veiculos');
+            Route::get('delete/{id}', [veiculosController::class, 'delete'])->name('delete.veiculos');
+            Route::post('saveVeiculo/{id}', [veiculosController::class, 'saveVeiculos'])->name('save.veiculos');
+            Route::get('update/{id}', [veiculosController::class, 'update'])->name('update.veiculos');
         });
 
         Route::prefix('mecanicos')->group(function(){
