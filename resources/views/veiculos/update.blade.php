@@ -10,7 +10,7 @@
             <h4 class="fw-bold" style="color:#6f42c1;">Alterar Mecânico</h4>
         </div>
         <div class="card-body">
-            <livewire:form-veiculo />
+            <livewire:form-update-veiculo :veiculo="$veiculo" />
         </div>
     </div>
 @endsection

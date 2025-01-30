@@ -69,7 +69,6 @@ class veiculosController extends Controller
             Log::info($e->getMessage());
         }
     }
-    public function saveVeiculos(){}
     public function update($id)
     {
         $veiculo = Veiculo::with('cliente')->find($id);
