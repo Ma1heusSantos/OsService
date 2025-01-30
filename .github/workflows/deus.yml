@@ -15,6 +15,6 @@ jobs:
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
-          server: ${{ secrets.ftp_server }}
+          server: ftp.geniusis.com.br
           username: os@geniusis.com.br
           password: matrix@1977
